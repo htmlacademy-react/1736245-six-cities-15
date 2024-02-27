@@ -1,13 +1,19 @@
 import Main from '../../pages/main/main';
-import MainEmpty from '../../pages/main-empty/main-empty';
-import Login from '../../pages/login/login';
+// import Login from '../../pages/login/login';
+// import Offer from '../../pages/offer/offer';
+// import Favorites from '../../pages/favorites/favorites';
 
-function App() {
+type TPlacesToStay = {
+  placesToStay: number;
+}
+
+function App({placesToStay}: TPlacesToStay) {
   return (
     <>
-      <Main/>
-      <MainEmpty/>
-      <Login/>
+      <Main placesToStay = {placesToStay}/>
+      {/* <Login/>
+      <Offer/>
+      <Favorites/> */}
     </>
   );
 }

@@ -1,3 +1,7 @@
+// cities names
+export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
+// cards
 export type TCardInfo = {
   id: number;
   isPremium: boolean;
@@ -8,7 +12,7 @@ export type TCardInfo = {
   isInBookmarks: boolean;
 }
 
-export const cards: TCardInfo[] = [
+export const CARDS: TCardInfo[] = [
   {
     id: 1,
     isPremium: true,
@@ -54,4 +58,38 @@ export const cards: TCardInfo[] = [
     type: 'Room',
     isInBookmarks: true,
   },
+];
+
+
+// offer gallery pics
+type TOfferGallery = {
+  id: number;
+  src: string;
+};
+
+export const OFFER_GALLERY: TOfferGallery[] = [
+  {
+    'id': 1,
+    'src': 'img/room.jpg'
+  },
+  {
+    'id': 2,
+    'src': 'img/apartment-01.jpg'
+  },
+  {
+    'id': 3,
+    'src': 'img/apartment-02.jpg'
+  },
+  {
+    'id': 4,
+    'src': 'img/apartment-03.jpg'
+  },
+  {
+    'id': 5,
+    'src': 'img/studio-01.jpg'
+  },
+  {
+    'id': 6,
+    'src': 'img/apartment-01.jpg'
+  }
 ];

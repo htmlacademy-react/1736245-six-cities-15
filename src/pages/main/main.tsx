@@ -1,10 +1,13 @@
 import Header from '../../components/header/header';
-import { cities } from '../../services/constants/cities';
-import { cards } from '../../services/constants/cards';
+import { CITIES } from '../../services/constants';
+import { CARDS } from '../../services/constants';
 import CityCard from '../../components/city-card/city-card';
 
+type TPlacesToStay = {
+    placesToStay: number;
+  };
 
-const Main = () => (
+const Main = ({placesToStay}: TPlacesToStay) => (
   <div className="page page--gray page--main">
     <Header/>
     <main className="page__main page__main--index">
@@ -12,7 +15,7 @@ const Main = () => (
       <div className="tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            { cities.map((title: string) => (
+            { CITIES.map((title: string) => (
               <li className="locations__item" key={title}>
                 <a className="locations__item-link tabs__item" href="#">
                   <span>{title}</span>
@@ -26,7 +29,7 @@ const Main = () => (
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">312 places to stay in Amsterdam</b>
+            <b className="places__found">{placesToStay} places to stay in Amsterdam</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
@@ -43,8 +46,8 @@ const Main = () => (
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              {cards.map((card) => (
-                <CityCard {...card} key={card.id} />
+              {CARDS.map((card) => (
+                <CityCard card={card} key={card.id} />
               ))}
             </div>
           </section>

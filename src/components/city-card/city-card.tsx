@@ -1,25 +1,29 @@
-import { TCardInfo } from '../../services/constants/cards';
+import { TCardInfo } from '../../services/constants';
 
 
-const CityCard = (item: TCardInfo) => (
+type TCard = {
+    card: TCardInfo;
+};
+
+const CityCard = ({card}: TCard) => (
   <article className="cities__card place-card">
-    { item.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
+    { card.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
     <div className="cities__image-wrapper place-card__image-wrapper">
       <a href="#">
-        <img className="place-card__image" src={item.src} width="260" height="200" alt="Place image"/>
+        <img className="place-card__image" src={card.src} width="260" height="200" alt="Place image"/>
       </a>
     </div>
     <div className="place-card__info">
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
-          <b className="place-card__price-value">&euro;{item.price}</b>
+          <b className="place-card__price-value">&euro;{card.price}</b>
           <span className="place-card__price-text">&#47;&nbsp;night</span>
         </div>
-        <button className={item.isInBookmarks ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'place-card__bookmark-button button'} type="button">
+        <button className={card.isInBookmarks ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'place-card__bookmark-button button'} type="button">
           <svg className="place-card__bookmark-icon" width="18" height="19">
             <use xlinkHref="#icon-bookmark"></use>
           </svg>
-          {item.isInBookmarks ? <span className="visually-hidden">In bookmarks</span> : <span className="visually-hidden">To bookmarks</span>}
+          {card.isInBookmarks ? <span className="visually-hidden">In bookmarks</span> : <span className="visually-hidden">To bookmarks</span>}
         </button>
       </div>
       <div className="place-card__rating rating">
@@ -29,9 +33,9 @@ const CityCard = (item: TCardInfo) => (
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#">{item.description}</a>
+        <a href="#">{card.description}</a>
       </h2>
-      <p className="place-card__type">{item.type}</p>
+      <p className="place-card__type">{card.type}</p>
     </div>
   </article>
 );
