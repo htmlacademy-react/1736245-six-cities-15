@@ -126,3 +126,19 @@ export const OFFER_GALLERY: TOfferGallery[] = [
     'src': 'img/apartment-01.jpg'
   }
 ];
+
+
+// routes on website
+export const AppRoute = {
+  Main: '/',
+  Login: '/login',
+  Favorites: '/favorites',
+  Offer: '/offer/:id'
+} as const;
+
+// private routing
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}

@@ -1,9 +1,13 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
+import { Helmet } from 'react-helmet-async';
 
 const Favorites = () => (
   <div className="page">
-    <Header/>
+    <Helmet>
+      <title>Шесть городов. Избранное</title>
+    </Helmet>
+    <Header />
     <main className="page__main page__main--favorites">
       <div className="page__favorites-container container">
         <section className="favorites">
