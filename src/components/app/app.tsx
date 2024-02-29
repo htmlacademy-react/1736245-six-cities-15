@@ -9,7 +9,7 @@ import Offer from '../../pages/offer/offer';
 import Favorites from '../../pages/favorites/favorites';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 import { HelmetProvider } from 'react-helmet-async';
-import {AppRoute, AuthorizationStatus} from '../../services/constants';
+import {APP_ROUTE, AuthorizationStatus} from '../../services/constants';
 import PrivateRoute from '../private-route/private-route';
 
 type TPlacesToStay = {
@@ -22,21 +22,21 @@ function App({placesToStay}: TPlacesToStay) {
       <BrowserRouter>
         <Routes>
           <Route
-            path={AppRoute.Main}
+            path={APP_ROUTE.Main}
             element={<Main placesToStay = {placesToStay} />}
           />
           {/* Login мы тоже кладем в PrivateRoute, но с флагом reverse,
           таким образом, если был вход в приложение, то мы не попадем на старницу логина, а перейдем на главную */}
           <Route
-            path={AppRoute.Login}
+            path={APP_ROUTE.Login}
             element={<Login />}
           />
           <Route
-            path={AppRoute.Offer}
+            path={APP_ROUTE.Offer}
             element={<Offer />}
           />
           <Route
-            path={AppRoute.Favorites}
+            path={APP_ROUTE.Favorites}
             element={
               <PrivateRoute
                 authorizationStatus={AuthorizationStatus.Auth}

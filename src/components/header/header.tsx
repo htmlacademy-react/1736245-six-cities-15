@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { AppRoute } from '../../services/constants';
+import { APP_ROUTE } from '../../services/constants';
 import HeaderNavigation from '../header-navigation/header-navigation';
 
 const Header = () => {
@@ -10,7 +10,7 @@ const Header = () => {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Link className={`header__logo-link${currentPath === AppRoute.Main ? ' header__logo-link--active' : ''}`} to={AppRoute.Main}>
+            <Link className={`header__logo-link${currentPath === APP_ROUTE.Main ? ' header__logo-link--active' : ''}`} to={APP_ROUTE.Main}>
               <img
                 className="header__logo"
                 src="img/logo.svg"
@@ -20,7 +20,7 @@ const Header = () => {
               />
             </Link>
           </div>
-          {currentPath !== AppRoute.Login && <HeaderNavigation />}
+          {currentPath !== APP_ROUTE.Login && <HeaderNavigation />}
         </div>
       </div>
     </header>
