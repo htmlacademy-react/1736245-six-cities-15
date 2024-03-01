@@ -129,7 +129,7 @@ export const OFFER_GALLERY: TOfferGallery[] = [
 
 
 // routes on website
-export const APP_ROUTE = {
+export const AppRoute = {
   Main: '/',
   Login: '/login',
   Favorites: '/favorites',
