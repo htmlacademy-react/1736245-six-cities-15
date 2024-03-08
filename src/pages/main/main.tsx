@@ -2,6 +2,7 @@ import Header from '../../components/header/header';
 import { CITIES } from '../../services/constants';
 import { CARDS } from '../../services/constants';
 import CityCard from '../../components/city-card/city-card';
+import { Helmet } from 'react-helmet-async';
 
 type TPlacesToStay = {
     placesToStay: number;
@@ -9,6 +10,9 @@ type TPlacesToStay = {
 
 const Main = ({placesToStay}: TPlacesToStay) => (
   <div className="page page--gray page--main">
+    <Helmet>
+      <title>6 cities</title>
+    </Helmet>
     <Header/>
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
