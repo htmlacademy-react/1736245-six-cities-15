@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { PLACES_TO_STAY } from './services/constants';
+import { Offers } from './mocks/offers';
 
 
 const root = ReactDOM.createRoot(
@@ -10,6 +10,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App placesToStay={PLACES_TO_STAY} />
+    <App offers={Offers} />
   </React.StrictMode>
 );

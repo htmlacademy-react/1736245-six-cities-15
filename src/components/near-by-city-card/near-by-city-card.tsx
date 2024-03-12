@@ -1,11 +1,10 @@
 import { TCardInfo } from '../../services/constants';
 
-
 type TCard = {
     card: TCardInfo;
 };
 
-const CityCard = ({card}: TCard) => (
+const NearByCityCard = ({card}: TCard) => (
   <article className="cities__card place-card">
     { card.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
     <div className="cities__image-wrapper place-card__image-wrapper">
@@ -40,4 +39,4 @@ const CityCard = ({card}: TCard) => (
   </article>
 );
 
-export default CityCard;
+export default NearByCityCard;
