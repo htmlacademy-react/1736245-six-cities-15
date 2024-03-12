@@ -3,7 +3,7 @@ import { TCardSizes } from './types/offers';
 // cities names
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
-
+// TODO - delete these cards
 // cards
 export type TCardInfo = {
   id: number;
@@ -14,6 +14,7 @@ export type TCardInfo = {
   type: string;
   isInBookmarks: boolean;
 }
+
 
 export const CARDS_ON_OFFER: TCardInfo[] = [
   {
@@ -103,18 +104,15 @@ export const enum TypesOfLiving {
   hotel = 'hotel'
 }
 
-export const OfferInsideItems = [
-  'Wi-Fi',
-  'Washing machine',
-  'Towels',
-  'Heating',
-  'Coffee machine',
-  'Baby seat',
-  'Kitchen',
-  'Dishwasher',
-  'Cabel TV',
-  'Fridge'
-] as const;
+
+export const enum Locations {
+  Paris ='Paris',
+  Cologne = 'Cologne',
+  Brussels = 'Brussels',
+  Amsterdam = 'Amsterdam',
+  Hamburg = 'Hamburg',
+  Dusseldorf = 'Dusseldorf'
+}
 
 // sizes of image cards depending on the page
 export const SIZES = {
@@ -128,11 +126,11 @@ export const SIZES = {
   },
 } as const;
 
-// TODO - check rating names later
+// TODO - ?
 export const RATING = {
-  'terrible':'1',
-  'bad':'2',
-  'okay':'3',
+  'terribly':'1',
+  'badly':'2',
+  'not bad':'3',
   'good':'4',
   'perfect':'5',
 } as const;

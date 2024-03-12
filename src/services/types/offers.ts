@@ -1,4 +1,4 @@
-import { CITIES, TypesOfLiving, OfferInsideItems } from '../constants';
+import { Locations, TypesOfLiving } from '../constants';
 
 export type TLocation = {
   latitude: number;
@@ -7,7 +7,7 @@ export type TLocation = {
 }
 
 export type TCity = {
-  name: keyof typeof CITIES;
+  name: keyof typeof Locations;
   location: {
     latitude: number;
     longitude: number;
@@ -27,7 +27,7 @@ export type TOffer = {
   rating: number;
   previewImage?: string;
   bedrooms?: number;
-  goods?: keyof typeof OfferInsideItems;
+  goods?: string[];
   host?: THost;
   images?: string[];
   maxAdults?: number;
