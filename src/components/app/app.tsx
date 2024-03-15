@@ -3,45 +3,46 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
-import Main from '../../pages/main/main';
-import Login from '../../pages/login/login';
-import Offer from '../../pages/offer/offer';
-import Favorites from '../../pages/favorites/favorites';
+import MainPage from '../../pages/main-page/main-page';
+import LoginPage from '../../pages/login-page/login-page';
+import OfferPage from '../../pages/offer-page/offer-page';
+import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 import { HelmetProvider } from 'react-helmet-async';
 import {AppRoute, AuthorizationStatus} from '../../services/constants';
 import PrivateRoute from '../private-route/private-route';
+import { TOffer } from '../../services/types/offers';
 
-type TPlacesToStay = {
-  placesToStay: number;
+type TAppProps = {
+  offers: TOffer[];
 }
 
-function App({placesToStay}: TPlacesToStay) {
+function App({offers}: TAppProps) {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<Main placesToStay = {placesToStay} />}
+            element={<MainPage offers={offers} />}
           />
-          {/* Login мы тоже кладем в PrivateRoute, но с флагом reverse,
-          таким образом, если был вход в приложение, то мы не попадем на старницу логина, а перейдем на главную */}
-          <Route
-            path={AppRoute.Login}
-            element={<Login />}
+          <Route path={AppRoute.Login} element={
+            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth} reverseOperation>
+              <LoginPage/>
+            </PrivateRoute>
+          }
           />
           <Route
             path={AppRoute.Offer}
-            element={<Offer />}
+            element={<OfferPage />}
           />
           <Route
             path={AppRoute.Favorites}
             element={
               <PrivateRoute
-                authorizationStatus={AuthorizationStatus.Auth}
+                authorizationStatus={AuthorizationStatus.NoAuth}
               >
-                <Favorites />
+                <FavoritesPage offers={offers} />
               </PrivateRoute>
             }
           />
