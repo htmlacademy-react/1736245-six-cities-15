@@ -1,4 +1,4 @@
-import { TCardSizes } from './types/offers';
+import { TCardSizes, TCity } from './types/offers';
 
 // cities names
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
@@ -138,3 +138,18 @@ export const RATING = {
 // limitations for comment form
 export const MIN_COMMENT_LENGHT = 50;
 export const MAX_COMMENT_LENGHT = 300;
+
+
+// Default city for leaflet map
+export const DEFAULT_CITY: TCity = {
+  name: 'Amsterdam',
+  location: {
+    latitude: 52.37454,
+    longitude: 4.897976,
+    zoom: 13
+  },
+} as const;
+
+// leaflet markers
+export const URL_MARKER_DEFAULT = '/img/pin.svg';
+export const URL_MARKER_CURRENT = '/img/pin-active.svg';
