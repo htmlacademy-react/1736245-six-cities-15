@@ -6,17 +6,18 @@ type TOffersListProps = {
     offers: TOffer[];
     listClassName: string;
     cardSize: TCardSizes;
+    prefixClass: string;
     handleMouseEnter?: (id: string) => void;
     handleMouseLeave?: () => void;
 }
 
-const OffersList = ({offers, listClassName, cardSize, handleMouseEnter, handleMouseLeave}: TOffersListProps) => {
+const OffersList = ({offers, listClassName, cardSize, prefixClass, handleMouseEnter, handleMouseLeave}: TOffersListProps) => {
   let offersList: React.ReactNode[] = [];
   //check of there are methods
   if (handleMouseEnter && handleMouseLeave) {
-    offersList = offers.map((offer) => <OfferCard offer={offer} prefixClass='cities' key={offer.id} cardSizes={cardSize} onMouseEnter={() => handleMouseEnter(offer.id)} onMouseLeave={handleMouseLeave}/>);
+    offersList = offers.map((offer) => <OfferCard offer={offer} prefixClass={prefixClass} key={offer.id} cardSizes={cardSize} onMouseEnter={() => handleMouseEnter(offer.id)} onMouseLeave={handleMouseLeave}/>);
   } else {
-    offersList = offers.map((offer) => <OfferCard offer={offer} prefixClass='cities' key={offer.id} cardSizes={cardSize}/>);
+    offersList = offers.map((offer) => <OfferCard offer={offer} prefixClass={prefixClass} key={offer.id} cardSizes={cardSize}/>);
   }
 
   return (

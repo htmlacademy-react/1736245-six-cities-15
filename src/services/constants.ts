@@ -153,3 +153,8 @@ export const DEFAULT_CITY: TCity = {
 // leaflet markers
 export const URL_MARKER_DEFAULT = '/img/pin.svg';
 export const URL_MARKER_CURRENT = '/img/pin-active.svg';
+
+// single offer (OfferPage)
+export const MAX_GALLERY_SIZE = 6;
+export const MAX_NEAREST_OFFERS_COUNT = 3;
+export const MAP_CENTER_TYPES = ['city', 'offer'] as const;
