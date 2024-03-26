@@ -2,18 +2,20 @@ import { useRef, useEffect } from 'react';
 import useMap from '../../hooks/use-map';
 import 'leaflet/dist/leaflet.css';
 import leaflet, { layerGroup } from 'leaflet';
-import { DEFAULT_CITY, URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../services/constants';
-import { TOffer } from '../../services/types/offers';
+import { DEFAULT_CITY, URL_MARKER_CURRENT, URL_MARKER_DEFAULT, MAP_CENTER_TYPES } from '../../services/constants';
+import { TOffer, TMapCenterType } from '../../services/types/offers';
 
 type TMapProps = {
   activeOfferId: string | null;
   offers: TOffer[];
+  prefixName: string;
+  type: TMapCenterType;
 };
 
-function Map({offers, activeOfferId}: TMapProps): JSX.Element {
+function Map({offers, activeOfferId, prefixName, type}: TMapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef);
-  const city = DEFAULT_CITY;
+  const center = type === MAP_CENTER_TYPES[0] ? DEFAULT_CITY.location : offers.find((item) => item.id === activeOfferId)?.location;
 
   const defaultCustomIcon = leaflet.icon({
     iconUrl: URL_MARKER_DEFAULT,
@@ -28,13 +30,13 @@ function Map({offers, activeOfferId}: TMapProps): JSX.Element {
   });
 
   useEffect(() => {
-    if (city && map) {
+    if (center && map) {
       const loc: leaflet.LatLngExpression = {
-        lat: city.location.latitude,
-        lng: city.location.longitude};
-      map.setView(loc, city.location.zoom);
+        lat: center.latitude,
+        lng: center.longitude};
+      map.setView(loc, center.zoom);
     }
-  }, [map, city]);
+  }, [map, center]);
   useEffect(() => {
     if (offers) {
       if (map) {
@@ -55,11 +57,11 @@ function Map({offers, activeOfferId}: TMapProps): JSX.Element {
 
   if (offers) {
     return (
-      <section ref={mapRef} data-id={activeOfferId} className="cities__map map"></section>
+      <section ref={mapRef} data-id={activeOfferId} className={`${prefixName}__map map`}></section>
     );
   }
   return (
-    <section className="cities__map map"></section>
+    <section className={`${prefixName}__map map`}></section>
   );
 }
 

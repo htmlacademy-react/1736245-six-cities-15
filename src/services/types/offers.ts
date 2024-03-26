@@ -1,4 +1,4 @@
-import { Locations, TypesOfLiving } from '../constants';
+import { Locations, TypesOfLiving, MAP_CENTER_TYPES } from '../constants';
 
 export type TLocation = {
   latitude: number;
@@ -45,3 +45,5 @@ export type TCardSizes = {
   width: string;
   height: string;
 }
+
+export type TMapCenterType = typeof MAP_CENTER_TYPES[number];

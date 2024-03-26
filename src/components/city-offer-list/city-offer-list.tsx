@@ -21,7 +21,7 @@ const CityOfferList = ({cityName, offersList}: TCityOfferListProps) => {
           <Link to={AppRoute.Main} className="locations__item-link"><span>{cityName}</span></Link>
         </div>
       </div>
-      <OfferList offers={offersList} listClassName='favorites__places' cardSize={cardSize}/>
+      <OfferList offers={offersList} listClassName='favorites__places' cardSize={cardSize} prefixClass={'favorites'}/>
     </li>
   );
 };
