@@ -1,4 +1,4 @@
-import { THost } from '../../types';
+import { THost } from '../../services/types/offers';
 
 type THostInfoProps = {
   host: THost;
