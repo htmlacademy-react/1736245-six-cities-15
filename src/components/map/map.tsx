@@ -1,21 +1,24 @@
 import { useRef, useEffect } from 'react';
 import useMap from '../../hooks/use-map';
-import 'leaflet/dist/leaflet.css';
 import leaflet, { layerGroup } from 'leaflet';
-import { DEFAULT_CITY, URL_MARKER_CURRENT, URL_MARKER_DEFAULT, MAP_CENTER_TYPES } from '../../services/constants';
+import 'leaflet/dist/leaflet.css';
+import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT, MAP_CENTER_TYPES, CITIES_LIST_LOCATIONS } from '../../services/constants';
 import { TOffer, TMapCenterType } from '../../services/types/offers';
+import { TCityName } from '../../services/utils';
 
 type TMapProps = {
   activeOfferId: string | null;
   offers: TOffer[];
   prefixName: string;
   type: TMapCenterType;
+  cityName? : TCityName;
 };
 
-function Map({offers, activeOfferId, prefixName, type}: TMapProps): JSX.Element {
+function Map({offers, activeOfferId, prefixName, type, cityName}: TMapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef);
-  const center = type === MAP_CENTER_TYPES[0] ? DEFAULT_CITY.location : offers.find((item) => item.id === activeOfferId)?.location;
+  const city = CITIES_LIST_LOCATIONS.find((item) => item.name === cityName);
+  const center = type === MAP_CENTER_TYPES[0] && city ? city.location : offers.find((item) => item.id === activeOfferId)?.location;
 
   const defaultCustomIcon = leaflet.icon({
     iconUrl: URL_MARKER_DEFAULT,
@@ -55,13 +58,8 @@ function Map({offers, activeOfferId, prefixName, type}: TMapProps): JSX.Element 
     }
   }, [map, offers, activeOfferId, currentCustomIcon, defaultCustomIcon]);
 
-  if (offers) {
-    return (
-      <section ref={mapRef} data-id={activeOfferId} className={`${prefixName}__map map`}></section>
-    );
-  }
   return (
-    <section className={`${prefixName}__map map`}></section>
+    <section ref={mapRef} data-id={activeOfferId} className={`${prefixName}__map map`}></section>
   );
 }
 

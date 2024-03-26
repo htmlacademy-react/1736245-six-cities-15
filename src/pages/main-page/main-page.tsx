@@ -1,41 +1,34 @@
 import Header from '../../components/header/header';
-import { CITIES, DEFAULT_CITY} from '../../services/constants';
 import { Helmet } from 'react-helmet-async';
-import { TOffer } from '../../services/types/offers';
 import OfferListBlock from '../../components/offer-list-block/offer-list-block';
+import CitiesList from '../../components/cities-list/cities-list';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { TCityName } from '../../services/utils';
+import { changeCity } from '../../store/action';
 
-type TPlacesToStay = {
-    offers: TOffer[];
+
+const MainPage = () => {
+  const cityName = useAppSelector((state) => state.city);
+  const cityOffersList = useAppSelector((state) => state.offers).filter((item) => item.city.name === cityName);
+  const dispatch = useAppDispatch();
+
+  const mainPageClass = cityOffersList.length === 0 ? 'page__main page__main--index page__main--index-empty' : 'page page--gray page--main';
+
+  const handleCityClick = (isSelected: boolean, newCity: TCityName) => {
+    if (!isSelected) {
+      dispatch(changeCity({city: newCity}));
+    }
   };
 
-const MainPage = ({offers}: TPlacesToStay) => {
-  const cityName = DEFAULT_CITY.name;
-  const cityOffers = offers.filter((item) => item.city.name === cityName);
-
   return (
-    <div className="page page--gray page--main">
+    <div className={mainPageClass}>
       <Helmet>
         <title>6 cities</title>
       </Helmet>
       <Header/>
       <main className="page__main page__main--index">
-        <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              { CITIES.map((title: string) => (
-                <li className="locations__item" key={title}>
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>{title}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </section>
-        </div>
-        <div className="cities">
-          <OfferListBlock offers={cityOffers} />
-        </div>
+        <CitiesList activeCity={cityName} handleCityClick={handleCityClick}/>
+        <OfferListBlock offers={cityOffersList} activeCity={cityName}/>
       </main>
     </div>
   );
