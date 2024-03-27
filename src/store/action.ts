@@ -4,4 +4,4 @@ import { TOffer } from '../services/types/offers';
 
 export const changeCity = createAction<{city:TCityName}>('city/change');
 
-export const fullOffersList = createAction<TOffer[]>('offers/full');
+export const getOffersList = createAction<TOffer[]>('offers/full');
