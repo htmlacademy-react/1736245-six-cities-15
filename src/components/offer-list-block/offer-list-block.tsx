@@ -1,18 +1,24 @@
 import { useState } from 'react';
 import { TOffer } from '../../services/types/offers';
-import OffersList from '../offers-list/offers-list';
-import { SIZES } from '../../services/constants';
+// import OffersList from '../offers-list/offers-list';
+// import { SIZES } from '../../services/constants';
 import Map from '../map/map';
 import { MAP_CENTER_TYPES } from '../../services/constants';
-import SortBy from '../sort-by/sort-by';
+import { TCityName } from '../../services/utils';
+import OfferListBlockEmpty from './offer-list-block-empty';
+import OfferListBlockFull from './offer-list-block-full';
 
 type TOffersListCardProps = {
     offers: TOffer[];
+    activeCity: TCityName;
 }
 
 
-const OfferListBlock = ({offers}: TOffersListCardProps) => {
+const OfferListBlock = ({offers, activeCity}: TOffersListCardProps) => {
+  const isEmpty: boolean = offers.length === 0;
   const [activeOfferId, setActiveOfferId] = useState<string|null>(null);
+  const emptyClassName = isEmpty ? ' cities__places-container--empty' : '';
+  const sectionClass = isEmpty ? 'cities__no-places' : 'cities__places places';
 
   function handleMouseEnter(id:string) {
     setActiveOfferId(id);
@@ -22,16 +28,17 @@ const OfferListBlock = ({offers}: TOffersListCardProps) => {
     setActiveOfferId(null);
   }
 
+  const offersBlock : JSX.Element = isEmpty ? <OfferListBlockEmpty activeCity={activeCity}/> : <OfferListBlockFull offers={offers} activeCity={activeCity} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave}/>;
+
   return (
-    <div className="cities__places-container container">
-      <section className="cities__places places">
-        <h2 className="visually-hidden">Places</h2>
-        <b className="places__found">{offers.length} places to stay in Amsterdam</b>
-        <SortBy/>
-        <OffersList offers={offers} listClassName={'cities__places-list places__list tabs__content'} cardSize={SIZES.offers} prefixClass={'cities'} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave}/>
-      </section>
-      <div className="cities__right-section">
-        <Map activeOfferId={activeOfferId} offers={offers} prefixName={'cities'} type={MAP_CENTER_TYPES[0]}/>
+    <div className="cities">
+      <div className={`cities__places-container${emptyClassName} container`}>
+        <section className={sectionClass}>
+          {offersBlock}
+        </section>
+        <div className="cities__right-section">
+          {offers.length > 0 && <Map activeOfferId={activeOfferId} offers={offers} prefixName={'cities'} type={MAP_CENTER_TYPES[0]} cityName={activeCity}/>}
+        </div>
       </div>
     </div>
   );

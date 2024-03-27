@@ -24,7 +24,7 @@ function App({offers}: TAppProps) {
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainPage offers={offers} />}
+            element={<MainPage />}
           />
           <Route path={AppRoute.Login} element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth} reverseOperation>
