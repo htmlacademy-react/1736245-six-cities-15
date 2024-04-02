@@ -209,3 +209,11 @@ export const CITIES_LIST_LOCATIONS :TCity[] = [
     },
   },
 ];
+
+// sorting
+export enum SortingNames {
+  Popular = 'Popular',
+  Low2High = 'Price: low to high',
+  High2Low = 'Price: high to low',
+  TopRatedFirst = 'Top rated first',
+}
