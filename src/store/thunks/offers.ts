@@ -14,3 +14,5 @@ export const fetchOffers = createAsyncThunk<TOffer[], void, {
     return response.data;
   }
 );
+
+

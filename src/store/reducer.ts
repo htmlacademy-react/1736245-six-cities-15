@@ -11,6 +11,7 @@ const initialState: TState = {
   activeSorting: SortingNames.Popular,
   authStatus: AuthorizationStatus.NoAuth,
   areOffersFetched: false,
+  currentOffer: null,
 };
 
 export const reducer = createReducer(initialState, (builder) => {

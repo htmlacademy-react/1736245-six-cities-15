@@ -13,4 +13,5 @@ export type TState = {
     error?: null | string | undefined;
     authStatus: AuthorizationStatus;
     areOffersFetched: boolean;
+    currentOffer?: null | TOffer;
 }
