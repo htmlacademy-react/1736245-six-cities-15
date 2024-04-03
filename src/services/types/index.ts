@@ -8,9 +8,9 @@ import { AuthorizationStatus } from '../constants';
 export type TAppDispatch = typeof store.dispatch;
 export type TState = {
     city: TCityName;
-    offers: TOffer[];
+    offers: TOffer[] | [];
     activeSorting: SortingNames;
-    error: null | string;
+    error?: null | string | undefined;
     authStatus: AuthorizationStatus;
     areOffersFetched: boolean;
 }

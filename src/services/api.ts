@@ -3,6 +3,7 @@ import { BASE_URL, TIMEOUT } from './constants';
 import {getToken} from './token';
 import { StatusCodeMapping } from './constants';
 import { store } from '../store';
+import { setError } from '../store/action';
 
 // error type
 export type TAxiosError = {
@@ -13,6 +14,7 @@ export type TAxiosError = {
 //error handling
 const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
 
+// show error if there any problems with token
 export const showError = (message: string): void => {
   store.dispatch(setError(message));
 };

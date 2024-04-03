@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { TCityName } from '../../services/utils';
 import { changeCity } from '../../store/action';
 import { TOffer } from '../../services/types/offers';
-import Loading from '../../components/loading/loading';
+import LoadingSpinner from '../../components/loading-spinner/loading-spinner';
 
 type TMainPageProps = {
   offers: TOffer[];
@@ -34,7 +34,7 @@ const MainPage = ({ offers }: TMainPageProps) => {
       <Header/>
       <main className="page__main page__main--index">
         <CitiesList activeCity={cityName} handleCityClick={handleCityClick} />
-        {isLoading ? <Loading /> : <OfferListBlock offers={cityOffersList} activeCity={cityName} />}
+        {isLoading ? <LoadingSpinner /> : <OfferListBlock offers={cityOffersList} activeCity={cityName} />}
       </main>
     </div>
   );

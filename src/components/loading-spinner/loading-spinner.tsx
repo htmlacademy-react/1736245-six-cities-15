@@ -1,4 +1,4 @@
-const Loading = () => (
+const LoadingSpinner = () => (
   <div className="cities">
     <div className='cities__places-container container'>
       <section className='cities__places places'>
@@ -9,4 +9,4 @@ const Loading = () => (
   </div>
 );
 
-export default Loading;
+export default LoadingSpinner;
