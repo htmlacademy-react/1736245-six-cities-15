@@ -9,25 +9,31 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 import { HelmetProvider } from 'react-helmet-async';
-import {AppRoute, AuthorizationStatus} from '../../services/constants';
+import {AppRoute} from '../../services/constants';
 import PrivateRoute from '../private-route/private-route';
-import { TOffer } from '../../services/types/offers';
+import { fetchOffers } from '../../store/thunks/offers';
+import { useAppSelector } from '../../hooks';
+import { useEffect } from 'react';
+import { useAppDispatch } from '../../hooks';
 
-type TAppProps = {
-  offers: TOffer[];
-}
-
-function App({offers}: TAppProps) {
+function App() {
+  const dispatch = useAppDispatch();
+  // onload get offers
+  useEffect(() => {
+    dispatch(fetchOffers());
+  }, []);
+  const offers = useAppSelector((state) => state.offers);
+  const authStatus = useAppSelector((state) => state.authStatus);
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainPage />}
+            element={<MainPage offers={offers} />}
           />
           <Route path={AppRoute.Login} element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth} reverseOperation>
+            <PrivateRoute authorizationStatus={authStatus} reverseOperation>
               <LoginPage/>
             </PrivateRoute>
           }
@@ -40,7 +46,7 @@ function App({offers}: TAppProps) {
             path={AppRoute.Favorites}
             element={
               <PrivateRoute
-                authorizationStatus={AuthorizationStatus.NoAuth}
+                authorizationStatus={authStatus}
               >
                 <FavoritesPage offers={offers} />
               </PrivateRoute>

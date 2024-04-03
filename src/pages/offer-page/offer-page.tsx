@@ -2,14 +2,19 @@ import Header from '../../components/header/header';
 import { MAX_NEAREST_OFFERS_COUNT, SIZES} from '../../services/constants';
 import { Helmet } from 'react-helmet-async';
 import SingleOffer from '../../components/single-offer/single-offer';
-import { Offers } from '../../mocks/offers';
+// import { Offers } from '../../mocks/offers';
 import OfferCard from '../../components/offer-card/offer-card';
+import { useAppSelector } from '../../hooks';
+// import { useParams } from 'react-router-dom';
 
 
 const OfferPage = () => {
-  const offer = Offers[0];
-  const offerCount = Offers.slice(0, MAX_NEAREST_OFFERS_COUNT);
-  const nearbyOffers = Offers.length < offerCount.length ? Offers : offerCount;
+  const offers = useAppSelector((state) => state.offers);
+  // const isLoading = useAppSelector((state) => state.areOffersFetched);
+  // const { id: currentId } = useParams();
+  const offer = offers[0];
+  const offerCount = offers.slice(0, MAX_NEAREST_OFFERS_COUNT);
+  const nearbyOffers = offers.length < offerCount.length ? offers : offerCount;
 
   return (
     <div className="page">

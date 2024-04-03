@@ -1,13 +1,17 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { CITIES, SortingNames } from '../services/constants';
-import { changeCity, getOffersList, sortOffers } from './action';
-import { Offers } from '../mocks/offers';
+import { changeCity, getOffersList, sortOffers, setError } from './action';
 import { TState } from '../services/types';
+import { AuthorizationStatus } from '../services/constants';
+import { fetchOffers } from './thunks/offers';
 
 const initialState: TState = {
   city: CITIES[0],
-  offers: Offers,
+  offers: [],
   activeSorting: SortingNames.Popular,
+  authStatus: AuthorizationStatus.NoAuth,
+  areOffersFetched: false,
+  currentOffer: null,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -20,5 +24,20 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(sortOffers, (state, action) => {
       state.activeSorting = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
+    })
+    // Handle the async thunk lifecycle actions
+    .addCase(fetchOffers.pending, (state) => {
+      state.areOffersFetched = true;
+    })
+    .addCase(fetchOffers.fulfilled, (state, action) => {
+      state.offers = action.payload;
+      state.areOffersFetched = false;
+    })
+    .addCase(fetchOffers.rejected, (state, action) => {
+      state.areOffersFetched = false;
+      state.error = action.error.message;
     });
 });

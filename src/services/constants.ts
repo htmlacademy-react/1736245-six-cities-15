@@ -1,4 +1,5 @@
 import { TCardSizes, TCity } from './types/offers';
+import { StatusCodes } from 'http-status-codes';
 
 // cities names
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
@@ -217,3 +218,20 @@ export enum SortingNames {
   High2Low = 'Price: high to low',
   TopRatedFirst = 'Top rated first',
 }
+
+// axios
+export const TIMEOUT = 5000;
+export const BASE_URL = 'https://15.design.htmlacademy.pro/six-cities';
+
+export enum Endpoints {
+  Offers = '/offers',
+  Favorite = '/favorite',
+  Login = '/login',
+  Logout = '/logout',
+}
+
+export const StatusCodeMapping: Record<number, boolean> = {
+  [StatusCodes.BAD_REQUEST]: true,
+  [StatusCodes.UNAUTHORIZED]: true,
+  [StatusCodes.NOT_FOUND]: true
+};
