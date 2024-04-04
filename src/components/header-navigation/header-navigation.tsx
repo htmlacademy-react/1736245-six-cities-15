@@ -8,6 +8,7 @@ import { logout } from '../../store/thunks/user';
 const HeaderNavigation = (): JSX.Element => {
   const authStatus = useAppSelector((state) => state.auth.authStatus);
   const dispatch = useAppDispatch();
+
   return (
     <nav className="header__nav">
       {authStatus !== AuthorizationStatus.Auth ? (
