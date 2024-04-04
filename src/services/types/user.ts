@@ -15,4 +15,4 @@ export type TAuthorisation = {
   'token': string;
 };
 
-export type TUserAuthorisation = TUser & TAuthorisation;
+export type TUserAuthorization = TUser & TAuthorisation;

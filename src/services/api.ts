@@ -4,6 +4,7 @@ import {getToken} from './token';
 import { StatusCodeMapping } from './constants';
 import { store } from '../store';
 import { setError } from '../store/action';
+import { clearError } from '../store/thunks/clear-error';
 
 // error type
 export type TAxiosError = {
@@ -15,10 +16,12 @@ export type TAxiosError = {
 const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
 
 // show error if there any problems with token
-export const showError = (message: string): void => {
+export const processErrorHandle = (message: string): void => {
   store.dispatch(setError(message));
+  store.dispatch(clearError());
 };
 
+// creating request
 export const createApi = (): AxiosInstance => {
   const api = axios.create({
     baseURL: BASE_URL,
@@ -43,7 +46,7 @@ export const createApi = (): AxiosInstance => {
       if (error.response && shouldDisplayError(error.response)) {
         const detailMessage = (error.response.data);
 
-        showError(detailMessage.message);
+        processErrorHandle(detailMessage.message);
       }
 
       throw error;

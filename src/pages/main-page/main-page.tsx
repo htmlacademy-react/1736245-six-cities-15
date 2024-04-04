@@ -14,9 +14,9 @@ type TMainPageProps = {
 
 const MainPage = ({ offers }: TMainPageProps) => {
   const dispatch = useAppDispatch();
-  const cityName = useAppSelector((state) => state.city);
+  const cityName = useAppSelector((state) => state.cities.city);
   const cityOffersList = offers.filter((item) => item.city.name === cityName);
-  const isLoading = useAppSelector((state) => state.areOffersFetched);
+  const isLoading = useAppSelector((state) => state.offers.areOffersFetched);
 
   const mainPageClass = cityOffersList.length === 0 ? 'page__main page__main--index page__main--index-empty' : 'page page--gray page--main';
 

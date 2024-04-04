@@ -23,7 +23,6 @@ function App() {
     dispatch(fetchOffers());
   }, [dispatch]);
   const offers = useAppSelector((state) => state.offers.offers);
-  // const offers = useAppSelector((state) => state.offers.offers);
   const authStatus = useAppSelector((state) => state.auth.authStatus);
   return (
     <HelmetProvider>

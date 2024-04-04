@@ -9,8 +9,8 @@ import { useAppSelector } from '../../hooks';
 
 
 const OfferPage = () => {
-  const offers = useAppSelector((state) => state.offers);
-  // const isLoading = useAppSelector((state) => state.areOffersFetched);
+  const offers = useAppSelector((state) => state.offers.offers);
+  // const isLoading = useAppSelector((state) => state.offers.areOffersFetched);
   // const { id: currentId } = useParams();
   const offer = offers[0];
   const offerCount = offers.slice(0, MAX_NEAREST_OFFERS_COUNT);

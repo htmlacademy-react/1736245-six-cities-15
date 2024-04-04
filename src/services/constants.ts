@@ -221,6 +221,7 @@ export enum SortingNames {
 
 // axios
 export const TIMEOUT = 5000;
+export const TIMEOUT_SHOW_ERROR = 2000;
 export const BASE_URL = 'https://15.design.htmlacademy.pro/six-cities';
 
 export enum Endpoints {
