@@ -21,9 +21,9 @@ function App() {
   // onload get offers
   useEffect(() => {
     dispatch(fetchOffers());
-  }, []);
-  const offers = useAppSelector((state) => state.offers);
-  const authStatus = useAppSelector((state) => state.authStatus);
+  }, [dispatch]);
+  const offers = useAppSelector((state) => state.offers.offers);
+  const authStatus = useAppSelector((state) => state.auth.authStatus);
   return (
     <HelmetProvider>
       <BrowserRouter>

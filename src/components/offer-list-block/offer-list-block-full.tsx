@@ -14,7 +14,7 @@ type TOfferListBlockFullProps = {
 }
 
 const OfferListBlockFull = ({offers, activeCity, handleMouseEnter, handleMouseLeave}: TOfferListBlockFullProps) => {
-  const activeSorting = useAppSelector((state) => state.activeSorting);
+  const activeSorting = useAppSelector((state) => state.cities.activeSorting);
   const sortedOffers = getSortedOffersList(offers, activeSorting);
   return (
     <>
