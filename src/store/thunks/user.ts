@@ -2,7 +2,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
 import { Endpoints } from '../../services/constants';
 import { TUserAuthorization, TUserData } from '../../services/types/user';
-import { dropToken } from '../../services/token';
+import { dropToken, saveToken } from '../../services/token';
 
 export const checkAuth = createAsyncThunk<
     TUserAuthorization,
@@ -23,7 +23,8 @@ export const login = createAsyncThunk<void, TUserData, {
 }>(
   'user/login',
   async ({ email, password }, { extra: api }) => {
-    await api.post<TUserAuthorization>(Endpoints.Login, { email, password });
+    const { data: { token } } = await api.post<TUserData>(Endpoints.Login, { email, password });
+    saveToken(token);
   }
 );
 
@@ -32,7 +33,11 @@ export const logout = createAsyncThunk<void, undefined, {
 }>(
   'user/logout',
   async (_arg, { extra: api }) => {
-    await api.delete(Endpoints.Logout);
-    dropToken();
+    try {
+      await api.delete(Endpoints.Logout);
+      dropToken();
+    } catch (error) {
+      console.log(error);
+    }
   }
 );

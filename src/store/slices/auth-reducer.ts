@@ -4,6 +4,7 @@ import { checkAuth, login, logout } from '../thunks/user';
 
 type TState = {
   authStatus: AuthorizationStatus;
+  authError?: string;
 }
 
 const initialState: TState = {
