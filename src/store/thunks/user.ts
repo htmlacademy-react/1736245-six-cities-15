@@ -23,7 +23,7 @@ export const login = createAsyncThunk<void, TUserData, {
 }>(
   'user/login',
   async ({ email, password }, { extra: api }) => {
-    const { data: { token } } = await api.post<TUserData>(Endpoints.Login, { email, password });
+    const { data: { token } } = await api.post<{ token: string }>(Endpoints.Login, { email, password });
     saveToken(token);
   }
 );
@@ -33,11 +33,13 @@ export const logout = createAsyncThunk<void, undefined, {
 }>(
   'user/logout',
   async (_arg, { extra: api }) => {
-    try {
-      await api.delete(Endpoints.Logout);
-      dropToken();
-    } catch (error) {
-      console.log(error);
-    }
+    await api.delete(Endpoints.Logout);
+    dropToken();
+    // try {
+    //   await api.delete(Endpoints.Logout);
+    //   dropToken();
+    // } catch (error) {
+    //   console.log(error);
+    // }
   }
 );
