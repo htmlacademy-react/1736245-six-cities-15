@@ -38,10 +38,12 @@ function App() {
             </PrivateRoute>
           }
           />
-          <Route
-            path={AppRoute.Offer}
-            element={<OfferPage />}
-          />
+          <Route path={AppRoute.Offer}>
+            <Route
+              path=':id'
+              element={<OfferPage />}
+            />
+          </Route>
           <Route
             path={AppRoute.Favorites}
             element={

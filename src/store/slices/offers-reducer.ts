@@ -6,6 +6,9 @@ type TState = {
     offers: TOffer[] | [];
     areOffersFetched: boolean;
     error?: null | string | undefined;
+    currentOffer?: TOffer;
+    nearByOffers?: TOffer;
+    isOfferLoading: boolean;
 }
 
 
@@ -13,6 +16,7 @@ const initialState: TState = {
   offers: [],
   areOffersFetched: false,
   error: null,
+  isOfferLoading: false,
 };
 
 export const offersSlice = createSlice({
