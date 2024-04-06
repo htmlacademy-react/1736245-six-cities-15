@@ -8,7 +8,7 @@ import { logout } from '../../store/thunks/user';
 const HeaderNavigation = (): JSX.Element => {
   const authStatus = useAppSelector((state) => state.auth.authStatus);
   const dispatch = useAppDispatch();
-  const userEmail = useAppSelector((state) => state.auth.user);
+  const user = useAppSelector((state) => state.auth.user);
 
   return (
     <nav className="header__nav">
@@ -30,7 +30,7 @@ const HeaderNavigation = (): JSX.Element => {
             <Link to={`${AppRoute.Favorites}/`} className="header__nav-link header__nav-link--profile">
               <div className="header__avatar-wrapper user__avatar-wrapper"></div>
               <span className="header__user-name user__name">
-                {userEmail.email}
+                {user?.email ?? 'User'}
               </span>
               <span className="header__favorite-count">3</span>
             </Link>
