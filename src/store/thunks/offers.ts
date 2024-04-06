@@ -52,15 +52,18 @@ export const fetchReviews = createAsyncThunk<TReview[], string, {
 );
 
 // update reviews
-export const sendReview = createAsyncThunk<TReview, { id: string; review: TReviewForm }, {
+export const sendReview = createAsyncThunk<void, { id: string; review: TReviewForm }, {
+  dispatch: TAppDispatch;
+  state: TRootState;
   extra: AxiosInstance;
 }
 >(
   'sendReview',
-  async ({ id, review }, { extra: api }) => {
+  async ({ id, review }, { dispatch, extra: api }) => {
     const response = await api.post<TReview>(`${Endpoints.Comments}/${id}`, review);
     if (response.status === 201) {
-      return response.data;
+      dispatch(fetchReviews(id));
+      // return response.data;
     } else {
       throw new Error('Failed to post review');
     }

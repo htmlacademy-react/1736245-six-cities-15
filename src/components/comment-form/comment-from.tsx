@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { RATING } from '../../services/constants';
+import { MIN_COMMENT_LENGHT, MAX_COMMENT_LENGHT, RATING } from '../../services/constants';
 import Rating from './rating';
 import { useAppDispatch } from '../../hooks';
 import { sendReview } from '../../store/thunks/offers';
@@ -45,7 +45,7 @@ const CommentForm = ({id}: TCommentForm) => {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" >Submit</button>
+        <button disabled={!(form.rating && form.comment.length >= MIN_COMMENT_LENGHT && form.comment.length < MAX_COMMENT_LENGHT)} className="reviews__submit form__submit button" type="submit" >Submit</button>
       </div>
     </form>
   );
