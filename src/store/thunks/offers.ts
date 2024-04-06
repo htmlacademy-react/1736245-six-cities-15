@@ -2,7 +2,8 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
 import { Endpoints } from '../../services/constants';
 import { TOffer } from '../../services/types/offers';
-import { TReview } from '../../services/types/reviews';
+import { TReview, TReviewForm } from '../../services/types/reviews';
+import { TAppDispatch, TRootState } from '..';
 
 export const fetchOffers = createAsyncThunk<TOffer[], void, {
     extra: AxiosInstance;
@@ -50,56 +51,56 @@ export const fetchReviews = createAsyncThunk<TReview[], string, {
   }
 );
 
-// send review
-// export const fetchReviewAction = createAsyncThunk<void, { id: string; reviewValues: TReviewForm }, {
-//   dispatch: AppDispatch;
-//   state: State;
-//   extra: AxiosInstance;
-// }
-// >(
-//   'data/fetchReview',
-//   async ({ id, reviewValues }, { dispatch, extra: api }) => {
-//     const data = await api.post(`${APIRoute.Comments}/${id}`, reviewValues);
-//     if (data.status === 201) {
-//       dispatch(fetchReviewsListAction(id));
-//     }
-//   }
-// );
+// update reviews
+export const sendReview = createAsyncThunk<TReview, { id: string; review: TReviewForm }, {
+  extra: AxiosInstance;
+}
+>(
+  'sendReview',
+  async ({ id, review }, { extra: api }) => {
+    const response = await api.post<TReview>(`${Endpoints.Comments}/${id}`, review);
+    if (response.status === 201) {
+      return response.data;
+    } else {
+      throw new Error('Failed to post review');
+    }
+  }
+);
 
 // get favorites
-// export const fetchFavoritesAction = createAsyncThunk<void, undefined, {
-//   dispatch: AppDispatch;
-//   state: State;
-//   extra: AxiosInstance;
-// }
-// >(
-//   'data/fetchFavorites',
-//   async (_arg, { dispatch, extra: api }) => {
-//     dispatch(setDataLoadingStatus(true));
-//     const { data } = await api.get<TOffer[]>(APIRoute.Favorite);
-//     dispatch(setDataLoadingStatus(false));
-//     dispatch(getFavorites(data));
-//   }
-// );
+export const fetchFavorites = createAsyncThunk<TOffer[], undefined, {
+  extra: AxiosInstance;
+}
+>(
+  'fetchFavorites',
+  async (_arg, { extra: api }) => {
+    const response = await api.get<TOffer[]>(Endpoints.Favorite);
+    return response.data;
+  }
+);
 
 // add/delete to favorites
-// export const fetchToggleFavorite = createAsyncThunk<void, { id: string; isFavorite: boolean }, {
-//   dispatch: AppDispatch;
-//   state: State;
-//   extra: AxiosInstance;
-// }
-// >(
-//   'data/fetchToggleFavorite',
-//   async ({ id, isFavorite }, { dispatch, extra: api }) => {
-//     const data = await api.post(`${APIRoute.Favorite}/${id}/${Number(isFavorite)}`);
-//     if (data.status === 200) {
-//       dispatch(changeFavoriteStatusInCurrentOffer(false));
-//     }
-//     if (data.status === 201) {
-//       dispatch(changeFavoriteStatusInCurrentOffer(true));
-//     }
-//     dispatch(fetchFavoritesAction());
-//     dispatch(fetchOfferListAction());
-//   }
-// );
+export const toggleFavorite = createAsyncThunk<TOffer, { id: string; isFavorite: boolean }, {
+  dispatch: TAppDispatch;
+  state: TRootState;
+  extra: AxiosInstance;
+}
+>(
+  'toggleFavorite',
+  async ({ id, isFavorite }, {dispatch, extra: api }) => {
+    try {
+      const response = await api.post<TOffer>(`${Endpoints.Favorite}/${id}/${Number(isFavorite)}`);
+      if (response.status === 200 || response.status === 201) {
+        dispatch(fetchFavorites());
+        dispatch(fetchOffers());
+        return response.data;
+      } else {
+        throw new Error('Failed to toggle');
+      }
+    } catch (error) {
+      // Error handling here
+      throw new Error('An error occurred while toggling favorite status');
+    }
+  }
+);
 

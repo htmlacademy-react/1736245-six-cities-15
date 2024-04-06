@@ -50,7 +50,7 @@ function App() {
               <PrivateRoute
                 authorizationStatus={authStatus}
               >
-                <FavoritesPage offers={offers} />
+                <FavoritesPage />
               </PrivateRoute>
             }
           />

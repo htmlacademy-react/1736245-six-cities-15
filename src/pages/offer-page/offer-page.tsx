@@ -8,22 +8,20 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchCurrentOffer, fetchNearByOffers, fetchReviews } from '../../store/thunks/offers';
+import LoadingSpinner from '../../components/loading-spinner/loading-spinner';
 
 
 const OfferPage = () => {
   const dispatch = useAppDispatch();
-  const offers = useAppSelector((state) => state.offers.offers);
-  // const isLoading = useAppSelector((state) => state.offers.areOffersFetched);
+  const isOfferFetched = useAppSelector((state) => state.currentOffer.isOfferFetched);
+  const isNearByFetched = useAppSelector((state) => state.currentOffer.isNearByFetched);
+  const areReviewsFetched = useAppSelector((state) => state.reviews.areReviewsFetched);
   const { id: currentId } = useParams();
-  const offer = offers[0];
-  const offerCount = offers.slice(0, MAX_NEAREST_OFFERS_COUNT);
-  //const nearbyOffers = offers.length < offerCount.length ? offers : offerCount;
-
   const currentOffer = useAppSelector((state) => state.currentOffer.currentOffer);
   const nearByOffers = useAppSelector((state) => state.currentOffer.nearByOffers);
-  const reviews = useAppSelector((state) => state.currentOffer.reviews);
-  const authStatus = useAppSelector((state) => state.auth.authStatus);
+  const reviews = useAppSelector((state) => state.reviews.reviews);
   const navigate = useNavigate();
+  const nearByOffersCut = nearByOffers.slice(0, MAX_NEAREST_OFFERS_COUNT);
 
   useEffect(()=> {
     if (!currentOffer && currentId) {
@@ -37,9 +35,9 @@ const OfferPage = () => {
     }
   },[dispatch, currentId, currentOffer]);
 
-  if (!currentOffer) {
-    navigate(AppRoute.Main);
-  }
+  // if (!currentOffer) {
+  //   navigate(AppRoute.Main);
+  // }
 
   return (
     <div className="page">
@@ -47,19 +45,21 @@ const OfferPage = () => {
         <title>6 cities. Offer.</title>
       </Helmet>
       <Header/>
-      <main className="page__main page__main--offer">
-        <SingleOffer />
-        <div className="container">
-          <section className="near-places places">
-            <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              {nearbyOffers.map((offerItem) => (
-                <OfferCard offer={offerItem} prefixClass={'near-places'} key={offerItem.id} cardSizes={SIZES.offers}/>
-              ))}
-            </div>
-          </section>
-        </div>
-      </main>
+      {isOfferFetched && isNearByFetched && areReviewsFetched ? (
+        <main className="page__main page__main--offer">
+          <SingleOffer offer={currentOffer} reviews={reviews} />
+          <div className="container">
+            <section className="near-places places">
+              <h2 className="near-places__title">Other places in the neighbourhood</h2>
+              <div className="near-places__list places__list">
+                {nearByOffersCut.map((offerItem) => (
+                  <OfferCard offer={offerItem} prefixClass={'near-places'} key={offerItem.id} cardSizes={SIZES.offers} />
+                ))}
+              </div>
+            </section>
+          </div>
+        </main>
+      ) : <LoadingSpinner />}
     </div>
   );
 };

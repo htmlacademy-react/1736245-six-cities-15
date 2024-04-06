@@ -1,6 +1,7 @@
 import { AppRoute } from '../../services/constants';
 import { TOffer, TCardSizes } from '../../services/types/offers';
 import { Link } from 'react-router-dom';
+import FavoriteLabel from '../ui/favorite-label';
 
 type TOfferCardProps = {
   offer: TOffer;
@@ -40,12 +41,7 @@ const OfferCard = ({offer, prefixClass, cardSizes, onMouseEnter, onMouseLeave}: 
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           {/* favorite */}
-          <button id={id} className={`place-card__bookmark-button ${classNameActive} button`} type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">In bookmarks</span>
-          </button>
+          <FavoriteLabel isFavorite={isFavorite} id={id} className={`place-card__bookmark-button ${classNameActive} button`} width={'18'} height={'19'}/>
         </div>
         {/* rating */}
         <div className="place-card__rating rating">

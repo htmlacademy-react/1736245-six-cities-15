@@ -3,6 +3,8 @@ export type TUser = {
   'id': number;
   'isPro': boolean;
   'name': string;
+  email: string;
+  token: string;
 };
 
 export type TUserData = {

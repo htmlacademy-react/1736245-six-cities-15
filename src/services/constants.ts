@@ -86,7 +86,7 @@ export const OFFER_GALLERY: TOfferGallery[] = [
 export const AppRoute = {
   Main: '/',
   Login: '/login',
-  Favorites: '/favorites',
+  Favorites: '/favorite',
   Offer: '/offer',
 } as const;
 

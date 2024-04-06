@@ -1,15 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TOffer } from '../../services/types/offers';
-import { fetchCurrentOffer, fetchNearByOffers, fetchReviews } from '../thunks/offers';
-import { TReview } from '../../services/types/reviews';
+import { fetchCurrentOffer, fetchNearByOffers, toggleFavorite } from '../thunks/offers';
 
 type TState = {
     currentOffer: TOffer | null;
     nearByOffers: TOffer[] | [];
     isOfferLoading: boolean;
     isNearByLoading: boolean;
-    areReviewsLoading: boolean;
-    reviews: TReview[] | [];
+    isOfferFetched: boolean;
+    isNearByFetched: boolean;
 }
 
 
@@ -17,9 +16,9 @@ const initialState: TState = {
   currentOffer: null,
   isOfferLoading: false,
   isNearByLoading: false,
-  areReviewsLoading: false,
   nearByOffers: [],
-  reviews: [],
+  isOfferFetched: false,
+  isNearByFetched: false,
 };
 
 export const currentOfferSlice = createSlice({
@@ -34,9 +33,10 @@ export const currentOfferSlice = createSlice({
       .addCase(fetchCurrentOffer.fulfilled, (state, action) => {
         state.currentOffer = action.payload;
         state.isOfferLoading = false;
+        state.isOfferFetched = true;
       })
-      .addCase(fetchCurrentOffer.rejected, (state, action) => {
-        state.error = action.error.message;
+      .addCase(fetchCurrentOffer.rejected, (state) => {
+        // state.error = action.error.message;
         state.isOfferLoading = false;
       })
       .addCase(fetchNearByOffers.pending, (state) => {
@@ -45,21 +45,16 @@ export const currentOfferSlice = createSlice({
       .addCase(fetchNearByOffers.fulfilled, (state, action) => {
         state.nearByOffers = action.payload;
         state.isNearByLoading = false;
+        state.isNearByFetched = true;
       })
-      .addCase(fetchNearByOffers.rejected, (state, action) => {
-        state.error = action.error.message;
+      .addCase(fetchNearByOffers.rejected, (state) => {
+        // state.error = action.error.message;
         state.isNearByLoading = false;
       })
-      .addCase(fetchReviews.pending, (state) => {
-        state.areReviewsLoading = true;
-      })
-      .addCase(fetchReviews.fulfilled, (state, action) => {
-        state.reviews = action.payload;
-        state.areReviewsLoading = false;
-      })
-      .addCase(fetchReviews.rejected, (state, action) => {
-        state.error = action.error.message;
-        state.areReviewsLoading = false;
+      .addCase(toggleFavorite.fulfilled, (state, action) => {
+        if(state.currentOffer !== null) {
+          state.currentOffer.isFavorite = action.payload.isFavorite;
+        }
       });
   },
 });
