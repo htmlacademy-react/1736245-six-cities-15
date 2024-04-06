@@ -3,7 +3,7 @@ import useMap from '../../hooks/use-map';
 import leaflet, { layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT, MAP_CENTER_TYPES, CITIES_LIST_LOCATIONS } from '../../services/constants';
-import { TOffer, TMapCenterType } from '../../services/types/offers';
+import { TMapCenterType } from '../../services/types/offers';
 import { TCityName } from '../../services/utils';
 import { useAppSelector } from '../../hooks';
 

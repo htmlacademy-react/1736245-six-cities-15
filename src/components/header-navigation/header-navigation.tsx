@@ -30,7 +30,7 @@ const HeaderNavigation = (): JSX.Element => {
             <Link to={`${AppRoute.Favorites}/`} className="header__nav-link header__nav-link--profile">
               <div className="header__avatar-wrapper user__avatar-wrapper"></div>
               <span className="header__user-name user__name">
-                  {userEmail.email}
+                {userEmail.email}
               </span>
               <span className="header__favorite-count">3</span>
             </Link>

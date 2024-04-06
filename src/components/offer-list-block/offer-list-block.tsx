@@ -37,7 +37,7 @@ const OfferListBlock = ({offers, activeCity}: TOffersListCardProps) => {
           {offersBlock}
         </section>
         <div className="cities__right-section">
-          {offers.length > 0 && <Map activeOfferId={activeOfferId} offers={offers} prefixName={'cities'} type={MAP_CENTER_TYPES[0]} cityName={activeCity}/>}
+          {offers.length > 0 && <Map activeOfferId={activeOfferId} prefixName={'cities'} type={MAP_CENTER_TYPES[0]} cityName={activeCity}/>}
         </div>
       </div>
     </div>

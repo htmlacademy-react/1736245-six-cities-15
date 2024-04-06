@@ -1,12 +1,12 @@
 import Header from '../../components/header/header';
-import { MAX_NEAREST_OFFERS_COUNT, SIZES, AppRoute} from '../../services/constants';
+import { MAX_NEAREST_OFFERS_COUNT, SIZES} from '../../services/constants';
 import { Helmet } from 'react-helmet-async';
 import SingleOffer from '../../components/single-offer/single-offer';
 // import { Offers } from '../../mocks/offers';
 import OfferCard from '../../components/offer-card/offer-card';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { fetchCurrentOffer, fetchNearByOffers, fetchReviews } from '../../store/thunks/offers';
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner';
 
@@ -20,7 +20,7 @@ const OfferPage = () => {
   const currentOffer = useAppSelector((state) => state.currentOffer.currentOffer);
   const nearByOffers = useAppSelector((state) => state.currentOffer.nearByOffers);
   const reviews = useAppSelector((state) => state.reviews.reviews);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const nearByOffersCut = nearByOffers.slice(0, MAX_NEAREST_OFFERS_COUNT);
 
   useEffect(()=> {
