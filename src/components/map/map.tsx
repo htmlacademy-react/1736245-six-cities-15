@@ -3,21 +3,22 @@ import useMap from '../../hooks/use-map';
 import leaflet, { layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT, MAP_CENTER_TYPES, CITIES_LIST_LOCATIONS } from '../../services/constants';
-import { TOffer, TMapCenterType } from '../../services/types/offers';
+import { TMapCenterType } from '../../services/types/offers';
 import { TCityName } from '../../services/utils';
+import { useAppSelector } from '../../hooks';
 
 type TMapProps = {
   activeOfferId: string | null;
-  offers: TOffer[];
   prefixName: string;
   type: TMapCenterType;
   cityName? : TCityName;
 };
 
-function Map({offers, activeOfferId, prefixName, type, cityName}: TMapProps): JSX.Element {
+function Map({activeOfferId, prefixName, type, cityName}: TMapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef);
   const city = CITIES_LIST_LOCATIONS.find((item) => item.name === cityName);
+  const offers = useAppSelector((state) => state.currentOffer.nearByOffers);
   const center = type === MAP_CENTER_TYPES[0] && city ? city.location : offers.find((item) => item.id === activeOfferId)?.location;
 
   const defaultCustomIcon = leaflet.icon({

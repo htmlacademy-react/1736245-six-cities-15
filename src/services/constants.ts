@@ -86,8 +86,8 @@ export const OFFER_GALLERY: TOfferGallery[] = [
 export const AppRoute = {
   Main: '/',
   Login: '/login',
-  Favorites: '/favorites',
-  Offer: '/offer/:id'
+  Favorites: '/favorite',
+  Offer: '/offer',
 } as const;
 
 // private routing
@@ -229,6 +229,7 @@ export enum Endpoints {
   Favorite = '/favorite',
   Login = '/login',
   Logout = '/logout',
+  Comments = '/comments'
 }
 
 export const StatusCodeMapping: Record<number, boolean> = {

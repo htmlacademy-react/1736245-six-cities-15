@@ -1,7 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
 import { Endpoints } from '../../services/constants';
-import { TUserAuthorization, TUserData } from '../../services/types/user';
+import { TUser, TUserAuthorization, TUserData } from '../../services/types/user';
 import { dropToken, saveToken } from '../../services/token';
 
 export const checkAuth = createAsyncThunk<
@@ -18,13 +18,19 @@ export const checkAuth = createAsyncThunk<
   }
 );
 
-export const login = createAsyncThunk<void, TUserData, {
+export const login = createAsyncThunk<TUser, TUserData, {
     extra: AxiosInstance;
 }>(
   'user/login',
   async ({ email, password }, { extra: api }) => {
-    const { data: { token } } = await api.post<{ token: string }>(Endpoints.Login, { email, password });
-    saveToken(token);
+    const response = await api.post<TUser>(Endpoints.Login, { email, password });
+    const token = response.data.token;
+    if (typeof token === 'string') {
+      saveToken(token);
+    } else {
+      throw new Error('Token is missing');
+    }
+    return response.data;
   }
 );
 

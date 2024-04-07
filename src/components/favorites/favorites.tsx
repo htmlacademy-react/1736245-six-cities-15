@@ -16,7 +16,7 @@ const Favorites = ({offers}: TFavoritesProps) => {
       <div className="page__favorites-container container">
         <section className={`favorites${emptySectionClass}`}>
           <h1 className={headerClass}>{title}</h1>
-          {offers ? <FavoritesList offerList={offers}/> : <FavoritesEmpty/>}
+          {offers.length > 0 ? <FavoritesList offerList={offers}/> : <FavoritesEmpty/>}
         </section>
       </div>
     </main>

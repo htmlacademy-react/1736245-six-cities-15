@@ -12,5 +12,5 @@ export const sortOffers = createAction<SortingNames>('sorting/change');
 
 export const setError = createAction<string | null>('error/set');
 
-export const getOfferById = createAction<TOffer>('currentOffer/set');
+// export const getOfferById = createAction<TOffer>('currentOffer/set');
 
