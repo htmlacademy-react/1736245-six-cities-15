@@ -21,3 +21,8 @@ export function getSortedOffersList(offers: TOffer[], sortType: SortingNames): T
       return offers.sort((a, b) => b.rating - a.rating);
   }
 }
+
+export function getRatingWidth(rating: number): string {
+  return `${rating * (100 / 5)}%`;
+}
+

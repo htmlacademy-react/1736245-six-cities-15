@@ -1,3 +1,4 @@
+import React from 'react';
 import { SIZES, CITIES } from '../../services/constants';
 import { TOffer } from '../../services/types/offers';
 import OfferList from '../offers-list/offers-list';
@@ -12,7 +13,7 @@ type TCityOfferListProps = {
 }
 
 // TODO Link should navigate to specific town
-const CityOfferList = ({cityName, offersList}: TCityOfferListProps) => {
+const CityOfferList = React.memo(({ cityName, offersList }: TCityOfferListProps): JSX.Element => {
   const cardSize = SIZES.favorites; // get the sizes of images for favorite cards
   return (
     <li className="favorites__locations-items">
@@ -21,9 +22,9 @@ const CityOfferList = ({cityName, offersList}: TCityOfferListProps) => {
           <Link to={AppRoute.Main} className="locations__item-link"><span>{cityName}</span></Link>
         </div>
       </div>
-      <OfferList offers={offersList} listClassName='favorites__places' cardSize={cardSize} prefixClass={'favorites'}/>
+      <OfferList offers={offersList} listClassName='favorites__places' cardSize={cardSize} prefixClass={'favorites'} />
     </li>
   );
-};
-
+});
+CityOfferList.displayName = 'CityOfferList';
 export default CityOfferList;

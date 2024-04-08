@@ -1,3 +1,4 @@
+import React from 'react';
 import { CITIES } from '../../services/constants';
 import { TCityName } from '../../services/utils';
 import CitiesItem from './cities-item';
@@ -7,9 +8,9 @@ type TCitiesListProps = {
   handleCityClick: (isSelected: boolean, newCity: TCityName) => void;
 }
 
-function CitiesList({activeCity, handleCityClick}: TCitiesListProps) : JSX.Element {
-  const cities = CITIES.map((item) => <CitiesItem key={item} isActive={item === activeCity} name={item} onClick={handleCityClick}/>);
-  return(
+const CitiesList = React.memo(({ activeCity, handleCityClick }: TCitiesListProps): JSX.Element => {
+  const cities = CITIES.map((item) => <CitiesItem key={item} isActive={item === activeCity} name={item} onClick={handleCityClick} />);
+  return (
     <>
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
@@ -21,6 +22,6 @@ function CitiesList({activeCity, handleCityClick}: TCitiesListProps) : JSX.Eleme
       </div>
     </>
   );
-}
-
+});
+CitiesList.displayName = 'CitiesList';
 export default CitiesList;

@@ -1,3 +1,4 @@
+import React from 'react';
 import { TOffer } from '../../services/types/offers';
 import OfferCard from '../offer-card/offer-card';
 import { TCardSizes } from '../../services/types/offers';
@@ -11,13 +12,13 @@ type TOffersListProps = {
     handleMouseLeave?: () => void;
 }
 
-const OffersList = ({offers, listClassName, cardSize, prefixClass, handleMouseEnter, handleMouseLeave}: TOffersListProps) => {
+const OffersList = React.memo(({ offers, listClassName, cardSize, prefixClass, handleMouseEnter, handleMouseLeave }: TOffersListProps): JSX.Element => {
   let offersList: React.ReactNode[] = [];
   //check of there are methods
   if (handleMouseEnter && handleMouseLeave) {
-    offersList = offers.map((offer) => <OfferCard offer={offer} prefixClass={prefixClass} key={offer.id} cardSizes={cardSize} onMouseEnter={() => handleMouseEnter(offer.id)} onMouseLeave={handleMouseLeave}/>);
+    offersList = offers.map((offer) => <OfferCard offer={offer} prefixClass={prefixClass} key={offer.id} cardSizes={cardSize} onMouseEnter={() => handleMouseEnter(offer.id)} onMouseLeave={handleMouseLeave} />);
   } else {
-    offersList = offers.map((offer) => <OfferCard offer={offer} prefixClass={prefixClass} key={offer.id} cardSizes={cardSize}/>);
+    offersList = offers.map((offer) => <OfferCard offer={offer} prefixClass={prefixClass} key={offer.id} cardSizes={cardSize} />);
   }
 
   return (
@@ -25,7 +26,7 @@ const OffersList = ({offers, listClassName, cardSize, prefixClass, handleMouseEn
       {offersList}
     </div>
   );
-};
-
+});
+OffersList.displayName = 'OffersList';
 
 export default OffersList;

@@ -1,3 +1,4 @@
+import React from 'react';
 import { TCityName } from '../../services/utils';
 
 type TCitiesItemProps = {
@@ -6,7 +7,7 @@ type TCitiesItemProps = {
   onClick: (selectCity: boolean, newCity: TCityName) => void;
 }
 
-function CitiesItem({isActive, name, onClick}: TCitiesItemProps) : JSX.Element {
+const CitiesItem = React.memo(({ isActive, name, onClick }: TCitiesItemProps): JSX.Element => {
   const activeClass = isActive ? ' tabs__item--active' : '';
   return (
     <li className="locations__item">
@@ -15,6 +16,6 @@ function CitiesItem({isActive, name, onClick}: TCitiesItemProps) : JSX.Element {
       </div>
     </li>
   );
-}
-
+});
+CitiesItem.displayName = 'CitiesItem';
 export default CitiesItem;

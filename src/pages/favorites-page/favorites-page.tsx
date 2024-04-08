@@ -1,22 +1,21 @@
+
+import React from 'react';
 import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 import Favorites from '../../components/favorites/favorites';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../services/constants';
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner';
-import { useAppSelector, useAppDispatch } from '../../hooks';
-import { useEffect } from 'react';
-import { fetchFavorites } from '../../store/thunks/offers';
+import { useAppSelector } from '../../hooks';
+import { TOffer } from '../../services/types/offers';
+
+type TFavoritesProps = {
+  favorites: TOffer[];
+}
 
 
-const FavoritesPage = () => {
-  const favorites = useAppSelector((state) => state.offers.favorites);
+const FavoritesPage = React.memo(({ favorites }: TFavoritesProps): JSX.Element => {
   const areFavoritesFetched = useAppSelector((state) => state.offers.areFavoritesFetched);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchFavorites());
-  }, [dispatch]);
 
   return (
     <div className="page">
@@ -38,6 +37,6 @@ const FavoritesPage = () => {
 
     </div>
   );
-};
-
+});
+FavoritesPage.displayName = 'FavoritesPage';
 export default FavoritesPage;

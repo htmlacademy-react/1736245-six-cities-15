@@ -8,7 +8,7 @@ import { FormEvent, useRef } from 'react';
 import { login } from '../../store/thunks/user';
 import { AuthorizationStatus } from '../../services/constants';
 
-const LoginPage = () => {
+const LoginPage = (): JSX.Element => {
   const city = getRandomCity();
   const authStatus = useAppSelector((state) => state.auth.authStatus);
   const dispatch = useAppDispatch();

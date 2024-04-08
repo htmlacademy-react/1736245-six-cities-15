@@ -1,3 +1,4 @@
+import React, {useMemo} from 'react';
 import { TCityName } from '../../services/utils';
 import { TOffer } from '../../services/types/offers';
 import OffersList from '../offers-list/offers-list';
@@ -13,9 +14,9 @@ type TOfferListBlockFullProps = {
   handleMouseLeave: () => void;
 }
 
-const OfferListBlockFull = ({offers, activeCity, handleMouseEnter, handleMouseLeave}: TOfferListBlockFullProps) => {
+const OfferListBlockFull = React.memo(({ offers, activeCity, handleMouseEnter, handleMouseLeave }: TOfferListBlockFullProps): JSX.Element => {
   const activeSorting = useAppSelector((state) => state.cities.activeSorting);
-  const sortedOffers = getSortedOffersList(offers, activeSorting);
+  const sortedOffers = useMemo(() => getSortedOffersList(offers, activeSorting), [offers, activeSorting]);
   return (
     <>
       <h2 className="visually-hidden">Places</h2>
@@ -24,6 +25,6 @@ const OfferListBlockFull = ({offers, activeCity, handleMouseEnter, handleMouseLe
       <OffersList offers={sortedOffers} listClassName={'cities__places-list places__list tabs__content'} cardSize={SIZES.offers} prefixClass={'cities'} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} />
     </>
   );
-};
-
+});
+OfferListBlockFull.displayName = 'OfferListBlockFull';
 export default OfferListBlockFull;

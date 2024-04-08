@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const Footer = () => (
+const Footer = (): JSX.Element => (
   <footer className="footer container">
     <Link className="footer__logo-link" to="/">
       <img
