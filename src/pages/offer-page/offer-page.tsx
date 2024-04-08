@@ -5,13 +5,14 @@ import SingleOffer from '../../components/single-offer/single-offer';
 // import { Offers } from '../../mocks/offers';
 import OfferCard from '../../components/offer-card/offer-card';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchCurrentOffer, fetchNearByOffers, fetchReviews } from '../../store/thunks/offers';
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner';
+import PageNotFound from '../page-not-found/page-not-found';
 
 
-const OfferPage = () => {
+const OfferPage = React.memo((): JSX.Element => {
   const dispatch = useAppDispatch();
   const isOfferFetched = useAppSelector((state) => state.currentOffer.isOfferFetched);
   const isNearByFetched = useAppSelector((state) => state.currentOffer.isNearByFetched);
@@ -21,9 +22,9 @@ const OfferPage = () => {
   const nearByOffers = useAppSelector((state) => state.currentOffer.nearByOffers);
   const reviews = useAppSelector((state) => state.reviews.reviews);
   // const navigate = useNavigate();
-  const nearByOffersCut = nearByOffers.slice(0, MAX_NEAREST_OFFERS_COUNT);
+  const nearByOffersCut = useMemo(() => nearByOffers.slice(0, MAX_NEAREST_OFFERS_COUNT), [nearByOffers]);
 
-  useEffect(()=> {
+  useEffect(() => {
     if (!currentOffer && currentId) {
       dispatch(fetchCurrentOffer(currentId));
       dispatch(fetchNearByOffers(currentId));
@@ -33,18 +34,18 @@ const OfferPage = () => {
       dispatch(fetchNearByOffers(currentId));
       dispatch(fetchReviews(currentId));
     }
-  },[dispatch, currentId, currentOffer]);
+  }, [dispatch, currentId, currentOffer]);
 
-  // if (!currentOffer) {
-  //   navigate(AppRoute.Main);
-  // }
+  if (!currentOffer) {
+    return <PageNotFound isOffer />;
+  }
 
   return (
     <div className="page">
       <Helmet>
         <title>6 cities. Offer.</title>
       </Helmet>
-      <Header/>
+      <Header />
       {isOfferFetched && isNearByFetched && areReviewsFetched ? (
         <main className="page__main page__main--offer">
           {currentOffer && <SingleOffer offer={currentOffer} reviews={reviews} />}
@@ -62,6 +63,7 @@ const OfferPage = () => {
       ) : <LoadingSpinner />}
     </div>
   );
-};
-export default OfferPage;
+});
+OfferPage.displayName = 'OfferPage';
 
+export default OfferPage;

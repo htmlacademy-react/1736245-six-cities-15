@@ -1,17 +1,26 @@
 import {Navigate} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../services/constants';
+import {AuthorizationStatus} from '../../services/constants';
+import { useAppSelector } from '../../hooks';
 
 type PrivateRouteProps = {
-    authorizationStatus: AuthorizationStatus;
-    children: JSX.Element;
-    reverseOperation?: boolean;
+  children: JSX.Element;
+  redirectIfAuth?: string; // Redirect here if user is authenticated
+  redirectIfNotAuth?: string; // Redirect here if user is not authenticated
+};
+
+const PrivateRoute = ({ children, redirectIfAuth, redirectIfNotAuth }: PrivateRouteProps): JSX.Element => {
+  const authStatus = useAppSelector((state) => state.auth.authStatus);
+  const isAuth = authStatus === AuthorizationStatus.Auth;
+
+  if (isAuth && redirectIfAuth) {
+    return <Navigate to={redirectIfAuth} />;
   }
 
-function PrivateRoute({children, authorizationStatus, reverseOperation = false}: PrivateRouteProps): JSX.Element {
-  const condition = reverseOperation ? authorizationStatus !== AuthorizationStatus.Auth : authorizationStatus === AuthorizationStatus.Auth;
-  return (
-    condition ? children : <Navigate to={AppRoute.Main}/>
-  );
-}
+  if (!isAuth && redirectIfNotAuth) {
+    return <Navigate to={redirectIfNotAuth} />;
+  }
+
+  return children;
+};
 
 export default PrivateRoute;

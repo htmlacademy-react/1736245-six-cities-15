@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../services/constants';
 import HeaderNavigation from '../header-navigation/header-navigation';
 
-const Header = () => {
+const Header = (): JSX.Element => {
   const currentPath = useLocation().pathname;
 
   return (

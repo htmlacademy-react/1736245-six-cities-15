@@ -20,11 +20,13 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(checkAuth.fulfilled, (state) => {
+      .addCase(checkAuth.fulfilled, (state, action) => {
         state.authStatus = AuthorizationStatus.Auth;
+        state.user = action.payload;
       })
       .addCase(checkAuth.rejected, (state) => {
         state.authStatus = AuthorizationStatus.NoAuth;
+        state.user = null;
       })
       .addCase(login.fulfilled, (state, action) => {
         state.authStatus = AuthorizationStatus.Auth;
@@ -39,16 +41,4 @@ export const authSlice = createSlice({
       });
   },
 });
-
-// Export reducer
 export default authSlice.reducer;
-
-// .addCase(loginAction.fulfilled, (state) => {
-//   state.authorizationStatus = AuthorizationStatus.Auth;
-// })
-// .addCase(loginAction.rejected, (state) => {
-//   state.authorizationStatus = AuthorizationStatus.NoAuth;
-// })
-// .addCase(logoutAction.fulfilled, (state) => {
-//   state.authorizationStatus = AuthorizationStatus.NoAuth;
-// });

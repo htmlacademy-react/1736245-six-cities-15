@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React,{ useState, useCallback } from 'react';
 import { TOffer } from '../../services/types/offers';
 // import OffersList from '../offers-list/offers-list';
 // import { SIZES } from '../../services/constants';
@@ -14,21 +14,21 @@ type TOffersListCardProps = {
 }
 
 
-const OfferListBlock = ({offers, activeCity}: TOffersListCardProps) => {
+const OfferListBlock = React.memo(({ offers, activeCity }: TOffersListCardProps): JSX.Element => {
   const isEmpty: boolean = offers.length === 0;
-  const [activeOfferId, setActiveOfferId] = useState<string|null>(null);
+  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
   const emptyClassName = isEmpty ? ' cities__places-container--empty' : '';
   const sectionClass = isEmpty ? 'cities__no-places' : 'cities__places places';
 
-  function handleMouseEnter(id:string) {
+  const handleMouseEnter = useCallback((id: string) => {
     setActiveOfferId(id);
-  }
+  }, []);
 
-  function handleMouseLeave() {
+  const handleMouseLeave = useCallback(() => {
     setActiveOfferId(null);
-  }
+  }, []);
 
-  const offersBlock : JSX.Element = isEmpty ? <OfferListBlockEmpty activeCity={activeCity}/> : <OfferListBlockFull offers={offers} activeCity={activeCity} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave}/>;
+  const offersBlock: JSX.Element = isEmpty ? <OfferListBlockEmpty activeCity={activeCity} /> : <OfferListBlockFull offers={offers} activeCity={activeCity} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} />;
 
   return (
     <div className="cities">
@@ -37,11 +37,11 @@ const OfferListBlock = ({offers, activeCity}: TOffersListCardProps) => {
           {offersBlock}
         </section>
         <div className="cities__right-section">
-          {offers.length > 0 && <Map activeOfferId={activeOfferId} prefixName={'cities'} type={MAP_CENTER_TYPES[0]} cityName={activeCity}/>}
+          {offers.length > 0 && <Map activeOfferId={activeOfferId} prefixName={'cities'} type={MAP_CENTER_TYPES[0]} cityName={activeCity} />}
         </div>
       </div>
     </div>
   );
-};
-
+});
+OfferListBlock.displayName = 'OfferListBlock';
 export default OfferListBlock;

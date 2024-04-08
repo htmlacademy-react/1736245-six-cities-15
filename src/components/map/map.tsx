@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import React,{ useRef, useEffect } from 'react';
 import useMap from '../../hooks/use-map';
 import leaflet, { layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -14,7 +14,7 @@ type TMapProps = {
   cityName? : TCityName;
 };
 
-function Map({activeOfferId, prefixName, type, cityName}: TMapProps): JSX.Element {
+const Map = React.memo(({ activeOfferId, prefixName, type, cityName }: TMapProps): JSX.Element => {
   const mapRef = useRef(null);
   const map = useMap(mapRef);
   const city = CITIES_LIST_LOCATIONS.find((item) => item.name === cityName);
@@ -37,7 +37,8 @@ function Map({activeOfferId, prefixName, type, cityName}: TMapProps): JSX.Elemen
     if (center && map) {
       const loc: leaflet.LatLngExpression = {
         lat: center.latitude,
-        lng: center.longitude};
+        lng: center.longitude
+      };
       map.setView(loc, center.zoom);
     }
   }, [map, center]);
@@ -62,6 +63,6 @@ function Map({activeOfferId, prefixName, type, cityName}: TMapProps): JSX.Elemen
   return (
     <section ref={mapRef} data-id={activeOfferId} className={`${prefixName}__map map`}></section>
   );
-}
-
+});
+Map.displayName = 'Map';
 export default Map;
