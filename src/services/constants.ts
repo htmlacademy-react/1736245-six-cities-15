@@ -1,11 +1,8 @@
 import { TCardSizes, TCity } from './types/offers';
 import { StatusCodes } from 'http-status-codes';
 
-// cities names
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
-// TODO - delete these cards
-// cards
 export type TCardInfo = {
   id: number;
   isPremium: boolean;
@@ -15,7 +12,6 @@ export type TCardInfo = {
   type: string;
   isInBookmarks: boolean;
 }
-
 
 export const CARDS_ON_OFFER: TCardInfo[] = [
   {
@@ -48,7 +44,6 @@ export const CARDS_ON_OFFER: TCardInfo[] = [
 ];
 
 
-// offer gallery pics
 type TOfferGallery = {
   id: number;
   src: string;
@@ -82,7 +77,6 @@ export const OFFER_GALLERY: TOfferGallery[] = [
 ];
 
 
-// routes on website
 export const AppRoute = {
   Main: '/',
   Login: '/login',
@@ -90,21 +84,18 @@ export const AppRoute = {
   Offer: '/offer',
 } as const;
 
-// private routing
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
 
-// types of living available on offer
 export const enum TypesOfLiving {
   apartment = 'apartment',
   room = 'room',
   house = 'house',
   hotel = 'hotel'
 }
-
 
 export const enum Locations {
   Paris ='Paris',
@@ -115,7 +106,6 @@ export const enum Locations {
   Dusseldorf = 'Dusseldorf'
 }
 
-// sizes of image cards depending on the page
 export const SIZES = {
   'offers' : <TCardSizes>{
     width: '260',
@@ -127,7 +117,6 @@ export const SIZES = {
   },
 } as const;
 
-// TODO - ?
 export const RATING = {
   'terribly':'1',
   'badly':'2',
@@ -136,12 +125,9 @@ export const RATING = {
   'perfect':'5',
 } as const;
 
-// limitations for comment form
-export const MIN_COMMENT_LENGHT = 50;
-export const MAX_COMMENT_LENGHT = 300;
+export const MIN_COMMENT_LENGTH = 50;
+export const MAX_COMMENT_LENGTH = 300;
 
-
-// Default city for leaflet map
 export const DEFAULT_CITY: TCity = {
   name: 'Amsterdam',
   location: {
@@ -151,11 +137,9 @@ export const DEFAULT_CITY: TCity = {
   },
 } as const;
 
-// leaflet markers
 export const URL_MARKER_DEFAULT = '/img/pin.svg';
 export const URL_MARKER_CURRENT = '/img/pin-active.svg';
 
-// single offer (OfferPage)
 export const MAX_GALLERY_SIZE = 6;
 export const MAX_NEAREST_OFFERS_COUNT = 3;
 export const MAP_CENTER_TYPES = ['city', 'offer'] as const;
@@ -211,7 +195,6 @@ export const CITIES_LIST_LOCATIONS :TCity[] = [
   },
 ];
 
-// sorting
 export enum SortingNames {
   Popular = 'Popular',
   Low2High = 'Price: low to high',
@@ -219,7 +202,6 @@ export enum SortingNames {
   TopRatedFirst = 'Top rated first',
 }
 
-// axios
 export const TIMEOUT = 5000;
 export const TIMEOUT_SHOW_ERROR = 2000;
 export const BASE_URL = 'https://15.design.htmlacademy.pro/six-cities';

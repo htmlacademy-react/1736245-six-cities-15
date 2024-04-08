@@ -28,7 +28,5 @@ export const citiesSlice = createSlice({
   }
 });
 
-
-// Export reducer
 export default citiesSlice.reducer;
 

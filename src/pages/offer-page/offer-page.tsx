@@ -2,7 +2,6 @@ import Header from '../../components/header/header';
 import { MAX_NEAREST_OFFERS_COUNT, SIZES} from '../../services/constants';
 import { Helmet } from 'react-helmet-async';
 import SingleOffer from '../../components/single-offer/single-offer';
-// import { Offers } from '../../mocks/offers';
 import OfferCard from '../../components/offer-card/offer-card';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import React, { useEffect, useMemo } from 'react';
@@ -21,7 +20,6 @@ const OfferPage = React.memo((): JSX.Element => {
   const currentOffer = useAppSelector((state) => state.currentOffer.currentOffer);
   const nearByOffers = useAppSelector((state) => state.currentOffer.nearByOffers);
   const reviews = useAppSelector((state) => state.reviews.reviews);
-  // const navigate = useNavigate();
   const nearByOffersCut = useMemo(() => nearByOffers.slice(0, MAX_NEAREST_OFFERS_COUNT), [nearByOffers]);
 
   useEffect(() => {
@@ -48,7 +46,7 @@ const OfferPage = React.memo((): JSX.Element => {
       <Header />
       {isOfferFetched && isNearByFetched && areReviewsFetched ? (
         <main className="page__main page__main--offer">
-          {currentOffer && <SingleOffer offer={currentOffer} reviews={reviews} />}
+          {currentOffer && <SingleOffer nearByOffers={nearByOffers} offer={currentOffer} reviews={reviews} />}
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>

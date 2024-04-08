@@ -48,5 +48,4 @@ export const offersSlice = createSlice({
   },
 });
 
-// Export reducer
 export default offersSlice.reducer;

@@ -16,5 +16,3 @@ export const store = configureStore({
 
 export type TRootState = ReturnType<typeof rootReducer>;
 export type TAppDispatch = typeof store.dispatch;
-// export const store = configureStore({reducer});
-

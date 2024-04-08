@@ -1,7 +1,5 @@
 import React,{ useState, useCallback } from 'react';
 import { TOffer } from '../../services/types/offers';
-// import OffersList from '../offers-list/offers-list';
-// import { SIZES } from '../../services/constants';
 import Map from '../map/map';
 import { MAP_CENTER_TYPES } from '../../services/constants';
 import { TCityName } from '../../services/utils';
@@ -37,7 +35,7 @@ const OfferListBlock = React.memo(({ offers, activeCity }: TOffersListCardProps)
           {offersBlock}
         </section>
         <div className="cities__right-section">
-          {offers.length > 0 && <Map activeOfferId={activeOfferId} prefixName={'cities'} type={MAP_CENTER_TYPES[0]} cityName={activeCity} />}
+          {offers.length > 0 && <Map offers={offers} activeOfferId={activeOfferId} prefixName={'cities'} type={MAP_CENTER_TYPES[0]} cityName={activeCity} />}
         </div>
       </div>
     </div>

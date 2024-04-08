@@ -6,22 +6,18 @@ import { store } from '../store';
 import { setError } from '../store/action';
 import { clearError } from '../store/thunks/clear-error';
 
-// error type
 export type TAxiosError = {
   type: string;
   message: string;
 };
 
-//error handling
 const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
 
-// show error if there any problems with token
 export const processErrorHandle = (message: string): void => {
   store.dispatch(setError(message));
   store.dispatch(clearError());
 };
 
-// creating request
 export const createApi = (): AxiosInstance => {
   const api = axios.create({
     baseURL: BASE_URL,

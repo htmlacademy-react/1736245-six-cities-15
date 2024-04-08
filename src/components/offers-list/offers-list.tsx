@@ -14,7 +14,7 @@ type TOffersListProps = {
 
 const OffersList = React.memo(({ offers, listClassName, cardSize, prefixClass, handleMouseEnter, handleMouseLeave }: TOffersListProps): JSX.Element => {
   let offersList: React.ReactNode[] = [];
-  //check of there are methods
+
   if (handleMouseEnter && handleMouseLeave) {
     offersList = offers.map((offer) => <OfferCard offer={offer} prefixClass={prefixClass} key={offer.id} cardSizes={cardSize} onMouseEnter={() => handleMouseEnter(offer.id)} onMouseLeave={handleMouseLeave} />);
   } else {

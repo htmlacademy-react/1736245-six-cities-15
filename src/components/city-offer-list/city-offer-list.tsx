@@ -12,9 +12,8 @@ type TCityOfferListProps = {
   offersList: TOffer[];
 }
 
-// TODO Link should navigate to specific town
 const CityOfferList = React.memo(({ cityName, offersList }: TCityOfferListProps): JSX.Element => {
-  const cardSize = SIZES.favorites; // get the sizes of images for favorite cards
+  const cardSize = SIZES.favorites;
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
