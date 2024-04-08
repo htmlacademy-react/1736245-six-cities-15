@@ -14,9 +14,10 @@ import { getRatingWidth } from '../../services/utils';
 type TSingleOfferProps = {
   offer: TOffer;
   reviews: TReview[];
+  nearByOffers: TOffer[];
 }
 
-const SingleOffer = React.memo(({ offer, reviews }: TSingleOfferProps): JSX.Element => {
+const SingleOffer = React.memo(({ offer, nearByOffers, reviews }: TSingleOfferProps): JSX.Element => {
   const { bedrooms, maxAdults, price, rating, title, id, goods, isPremium, isFavorite, images, host, description } = offer;
   const classNamePremium: string = !isPremium ? 'offer__mark  visually-hidden' : 'offer__mark';
   const classNameActive = isFavorite ? 'offer__bookmark-button--active' : 'offer__bookmark-button';
@@ -69,7 +70,7 @@ const SingleOffer = React.memo(({ offer, reviews }: TSingleOfferProps): JSX.Elem
           <Reviews id={id} reviews={reviews} />
         </div>
       </div>
-      <Map activeOfferId={id} prefixName={'offer'} type={MAP_CENTER_TYPES[1]} />
+      <Map offers={nearByOffers} activeOfferId={id} prefixName={'offer'} type={MAP_CENTER_TYPES[1]} />
     </section>
   );
 });

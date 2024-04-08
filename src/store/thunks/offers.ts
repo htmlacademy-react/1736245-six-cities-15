@@ -98,6 +98,7 @@ export const toggleFavorite = createAsyncThunk<TOffer, { id: string; isFavorite:
         throw new Error('Failed to toggle');
       }
     } catch (error) {
+
       throw new Error('An error occurred while toggling favorite status');
     }
   }

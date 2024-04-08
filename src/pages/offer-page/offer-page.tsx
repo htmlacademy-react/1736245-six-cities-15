@@ -46,7 +46,7 @@ const OfferPage = React.memo((): JSX.Element => {
       <Header />
       {isOfferFetched && isNearByFetched && areReviewsFetched ? (
         <main className="page__main page__main--offer">
-          {currentOffer && <SingleOffer offer={currentOffer} reviews={reviews} />}
+          {currentOffer && <SingleOffer nearByOffers={nearByOffers} offer={currentOffer} reviews={reviews} />}
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>

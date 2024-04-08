@@ -17,7 +17,6 @@ const MainPage = React.memo(({ offers }: TMainPageProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const cityName = useAppSelector((state) => state.cities.city);
   const isLoading = useAppSelector((state) => state.offers.areOffersLoading);
-
   const cityOffersList = useMemo(() => offers.filter((item) => item.city.name === cityName), [offers, cityName]);
 
   const handleCityClick = useCallback((isSelected: boolean, newCity: TCityName) => {
