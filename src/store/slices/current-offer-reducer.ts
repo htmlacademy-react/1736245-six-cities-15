@@ -11,7 +11,6 @@ type TState = {
     isNearByFetched: boolean;
 }
 
-
 const initialState: TState = {
   currentOffer: null,
   isOfferLoading: false,
@@ -36,7 +35,6 @@ export const currentOfferSlice = createSlice({
         state.isOfferFetched = true;
       })
       .addCase(fetchCurrentOffer.rejected, (state) => {
-        // state.error = action.error.message;
         state.isOfferLoading = false;
       })
       .addCase(fetchNearByOffers.pending, (state) => {
@@ -48,7 +46,6 @@ export const currentOfferSlice = createSlice({
         state.isNearByFetched = true;
       })
       .addCase(fetchNearByOffers.rejected, (state) => {
-        // state.error = action.error.message;
         state.isNearByLoading = false;
       })
       .addCase(toggleFavorite.fulfilled, (state, action) => {
@@ -59,5 +56,4 @@ export const currentOfferSlice = createSlice({
   },
 });
 
-// Export reducer
 export default currentOfferSlice.reducer;

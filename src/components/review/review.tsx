@@ -6,7 +6,7 @@ type TReviewProps = {
 }
 
 const Review = React.memo(({ review }: TReviewProps): JSX.Element => {
-  const { id, user, rating, comment, date } = review; // TODO format date
+  const { id, user, rating, comment, date } = review;
   const { avatarUrl, name, isPro } = user;
   const ratingPercent: string = `${Math.round(+rating) * 20}%`;
   return (

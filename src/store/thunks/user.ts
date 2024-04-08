@@ -41,11 +41,5 @@ export const logout = createAsyncThunk<void, undefined, {
   async (_arg, { extra: api }) => {
     await api.delete(Endpoints.Logout);
     dropToken();
-    // try {
-    //   await api.delete(Endpoints.Logout);
-    //   dropToken();
-    // } catch (error) {
-    //   console.log(error);
-    // }
   }
 );

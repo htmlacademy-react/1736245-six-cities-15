@@ -4,8 +4,8 @@ import { useAppSelector } from '../../hooks';
 
 type PrivateRouteProps = {
   children: JSX.Element;
-  redirectIfAuth?: string; // Redirect here if user is authenticated
-  redirectIfNotAuth?: string; // Redirect here if user is not authenticated
+  redirectIfAuth?: string;
+  redirectIfNotAuth?: string;
 };
 
 const PrivateRoute = ({ children, redirectIfAuth, redirectIfNotAuth }: PrivateRouteProps): JSX.Element => {

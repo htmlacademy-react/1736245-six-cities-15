@@ -9,7 +9,6 @@ type TState = {
     isReviewSent: boolean;
 }
 
-
 const initialState: TState = {
   areReviewsLoading: false,
   reviews: [],
@@ -32,7 +31,6 @@ export const reviewsSlice = createSlice({
         state.areReviewsFetched = true;
       })
       .addCase(fetchReviews.rejected, (state) => {
-        // state.error = action.error.message;
         state.areReviewsLoading = false;
       })
       .addCase(sendReview.fulfilled, (state) => {
@@ -44,5 +42,4 @@ export const reviewsSlice = createSlice({
   },
 });
 
-// Export reducer
 export default reviewsSlice.reducer;

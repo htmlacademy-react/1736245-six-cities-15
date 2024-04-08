@@ -1,7 +1,5 @@
 import React,{ useState, useCallback } from 'react';
 import { TOffer } from '../../services/types/offers';
-// import OffersList from '../offers-list/offers-list';
-// import { SIZES } from '../../services/constants';
 import Map from '../map/map';
 import { MAP_CENTER_TYPES } from '../../services/constants';
 import { TCityName } from '../../services/utils';

@@ -15,8 +15,6 @@ export const fetchOffers = createAsyncThunk<TOffer[], void, {
   }
 );
 
-// get current Offer
-
 export const fetchCurrentOffer = createAsyncThunk<TOffer, string, {
   extra: AxiosInstance;
 }>(
@@ -27,7 +25,7 @@ export const fetchCurrentOffer = createAsyncThunk<TOffer, string, {
   }
 );
 
-// get nearByOffers
+
 export const fetchNearByOffers = createAsyncThunk<TOffer[], string, {
   extra: AxiosInstance;
 }
@@ -39,7 +37,7 @@ export const fetchNearByOffers = createAsyncThunk<TOffer[], string, {
   }
 );
 
-// get all reviews
+
 export const fetchReviews = createAsyncThunk<TReview[], string, {
   extra: AxiosInstance;
 }
@@ -51,7 +49,7 @@ export const fetchReviews = createAsyncThunk<TReview[], string, {
   }
 );
 
-// update reviews
+
 export const sendReview = createAsyncThunk<void, { id: string; review: TReviewForm }, {
   dispatch: TAppDispatch;
   state: TRootState;
@@ -63,14 +61,13 @@ export const sendReview = createAsyncThunk<void, { id: string; review: TReviewFo
     const response = await api.post<TReview>(`${Endpoints.Comments}/${id}`, review);
     if (response.status === 201) {
       dispatch(fetchReviews(id));
-      // return response.data;
     } else {
       throw new Error('Failed to post review');
     }
   }
 );
 
-// get favorites
+
 export const fetchFavorites = createAsyncThunk<TOffer[], undefined, {
   extra: AxiosInstance;
 }
@@ -82,7 +79,7 @@ export const fetchFavorites = createAsyncThunk<TOffer[], undefined, {
   }
 );
 
-// add/delete to favorites
+
 export const toggleFavorite = createAsyncThunk<TOffer, { id: string; isFavorite: boolean }, {
   dispatch: TAppDispatch;
   state: TRootState;
@@ -101,7 +98,6 @@ export const toggleFavorite = createAsyncThunk<TOffer, { id: string; isFavorite:
         throw new Error('Failed to toggle');
       }
     } catch (error) {
-      // Error handling here
       throw new Error('An error occurred while toggling favorite status');
     }
   }

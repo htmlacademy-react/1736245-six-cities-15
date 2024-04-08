@@ -21,7 +21,7 @@ import { checkAuth } from '../../store/thunks/user';
 function App() {
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector((state) => state.auth.authStatus);
-  // check auth
+
   useEffect(() => {
     const token = getToken();
     if (token) {
@@ -29,7 +29,6 @@ function App() {
     }
   }, [authStatus, dispatch]);
 
-  // onload get offers
   useEffect(() => {
     dispatch(fetchOffers());
     if(authStatus === AuthorizationStatus.Auth) {
