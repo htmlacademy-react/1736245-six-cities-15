@@ -13,9 +13,9 @@ const Favorites = React.memo(({ offers }: TFavoritesProps): JSX.Element => {
   const title = offers ? 'Saved listing' : 'Favorites (empty)';
   const headerClass = offers ? 'favorites__title' : 'visually-hidden';
   return (
-    <main className={`page__main page__main--favorites${emptyMainClass}`}>
+    <main className={`page__main page__main--favorites ${emptyMainClass}`}>
       <div className="page__favorites-container container">
-        <section className={`favorites${emptySectionClass}`}>
+        <section className={`favorites ${emptySectionClass}`}>
           <h1 className={headerClass}>{title}</h1>
           {offers.length > 0 ? <FavoritesList offerList={offers} /> : <FavoritesEmpty />}
         </section>

@@ -11,7 +11,7 @@ const CitiesItem = React.memo(({ isActive, name, onClick }: TCitiesItemProps): J
   const activeClass = isActive ? ' tabs__item--active' : '';
   return (
     <li className="locations__item">
-      <div className={`locations__item-link tabs__item${activeClass}`} onClick={() => onClick(isActive, name)}>
+      <div className={`locations__item-link tabs__item ${activeClass}`} onClick={() => onClick(isActive, name)}>
         <span>{name}</span>
       </div>
     </li>

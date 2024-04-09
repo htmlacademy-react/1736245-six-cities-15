@@ -13,17 +13,17 @@ const CommentForm = React.memo(({ id }: TCommentForm): JSX.Element => {
   const [form, setForm] = useState({ rating: 0, comment: '' });
 
   const handleTextChange = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
-    setForm({
-      ...form,
+    setForm((prevForm) => ({
+      ...prevForm,
       comment: e.target.value
-    });
+    }));
   }, []);
 
   const handleRatingChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setForm({
-      ...form,
-      rating: Number(e.target.value)
-    });
+    setForm((prevForm) => ({
+      ...prevForm,
+      rating: Number(e.target.value),
+    }));
   }, []);
 
   const handleSubmit = useCallback((e: FormEvent) => {
