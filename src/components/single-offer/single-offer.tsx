@@ -70,7 +70,7 @@ const SingleOffer = React.memo(({ offer, nearByOffers, reviews }: TSingleOfferPr
           <Reviews id={id} reviews={reviews} />
         </div>
       </div>
-      <Map offers={nearByOffers} activeOfferId={id} prefixName={'offer'} type={MAP_CENTER_TYPES[1]} />
+      <Map offers={[...nearByOffers, offer]} cityName={offer.city.name} activeOfferId={id} prefixName={'offer'} type={MAP_CENTER_TYPES[1]} />
     </section>
   );
 });
