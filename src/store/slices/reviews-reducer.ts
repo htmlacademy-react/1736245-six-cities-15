@@ -7,6 +7,8 @@ type TState = {
     areReviewsFetched: boolean;
     reviews: TReview[] | [];
     isReviewSent: boolean;
+    shouldFormBeDisabled: boolean;
+    hasError: boolean;
 }
 
 const initialState: TState = {
@@ -14,6 +16,8 @@ const initialState: TState = {
   reviews: [],
   areReviewsFetched: false,
   isReviewSent: false,
+  shouldFormBeDisabled: false,
+  hasError: false,
 };
 
 export const reviewsSlice = createSlice({
@@ -33,11 +37,20 @@ export const reviewsSlice = createSlice({
       .addCase(fetchReviews.rejected, (state) => {
         state.areReviewsLoading = false;
       })
+      .addCase(sendReview.pending, (state) => {
+        state.shouldFormBeDisabled = true;
+        state.hasError = false;
+        state.isReviewSent = false;
+      })
       .addCase(sendReview.fulfilled, (state) => {
         state.isReviewSent = true;
+        state.shouldFormBeDisabled = false;
+        state.hasError = false;
       })
       .addCase(sendReview.rejected, (state) => {
         state.isReviewSent = false;
+        state.shouldFormBeDisabled = false;
+        state.hasError = true;
       });
   },
 });
