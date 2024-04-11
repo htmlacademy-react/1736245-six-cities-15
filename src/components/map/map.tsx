@@ -2,7 +2,7 @@ import React,{ useRef, useEffect } from 'react';
 import useMap from '../../hooks/use-map';
 import leaflet, { layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT, MAP_CENTER_TYPES, CITIES_LIST_LOCATIONS } from '../../services/constants';
+import { MapMarkers, MAP_CENTER_TYPES, CITIES_LIST_LOCATIONS } from '../../services/constants';
 import { TMapCenterType } from '../../services/types/offers';
 import { TCityName } from '../../services/utils';
 import { TOffer } from '../../services/types/offers';
@@ -22,13 +22,13 @@ const Map = React.memo(({ offers, activeOfferId, prefixName, type, cityName }: T
   const center = type === MAP_CENTER_TYPES[0] && city ? city.location : offers.find((item) => item.id === activeOfferId)?.location;
 
   const defaultCustomIcon = leaflet.icon({
-    iconUrl: URL_MARKER_DEFAULT,
+    iconUrl: MapMarkers.URL_MARKER_DEFAULT,
     iconSize: [40, 40],
     iconAnchor: [20, 40],
   });
 
   const currentCustomIcon = leaflet.icon({
-    iconUrl: URL_MARKER_CURRENT,
+    iconUrl: MapMarkers.URL_MARKER_CURRENT,
     iconSize: [40, 40],
     iconAnchor: [20, 40],
   });

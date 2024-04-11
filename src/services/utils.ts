@@ -10,15 +10,19 @@ export function getRandomCity(): TCityName {
 }
 
 export function getSortedOffersList(offers: TOffer[], sortType: SortingNames): TOffer[] {
+  const offersCopy = [...offers]; // Create a copy of the offers array
   switch (sortType) {
     case SortingNames.High2Low:
-      return offers.sort((a, b) => -(a.price - b.price));
+      return offersCopy.sort((a, b) => b.price - a.price);
     case SortingNames.Popular:
-      return offers.sort((a, b) => a.rating - b.rating);
+      // Assuming 'Popular' means more ratings are better
+      return offersCopy.sort((a, b) => b.rating - a.rating);
     case SortingNames.Low2High:
-      return offers.sort((a, b) => a.price - b.price);
+      return offersCopy.sort((a, b) => a.price - b.price);
     case SortingNames.TopRatedFirst:
-      return offers.sort((a, b) => b.rating - a.rating);
+      return offersCopy.sort((a, b) => b.rating - a.rating);
+    default:
+      return offersCopy;
   }
 }
 
