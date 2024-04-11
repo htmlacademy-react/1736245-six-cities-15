@@ -1,5 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {AxiosInstance} from 'axios';
+import { AxiosInstance } from 'axios';
 import { Endpoints } from '../../services/constants';
 import { TOffer } from '../../services/types/offers';
 import { TReview, TReviewForm } from '../../services/types/reviews';
